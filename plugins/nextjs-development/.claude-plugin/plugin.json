@@ -1,10 +1,10 @@
 {
-  "$schema": "https://raw.githubusercontent.com/anthropics/claude-code/main/schemas/plugin.schema.json",
+  "$schema": "https://anthropic.com/claude-code/plugin.schema.json",
   "name": "nextjs-development",
   "description": "Next.js development tools including comprehensive linting, documentation management, and best practices for App Router projects with pnpm.",
   "version": "1.0.0",
   "author": "steve",
-  "repository": "https://github.com/yourusername/plugins",
+  "repository": "https://github.com/slaguardia/claude-code-plugins",
   "components": {
     "commands": [
       {

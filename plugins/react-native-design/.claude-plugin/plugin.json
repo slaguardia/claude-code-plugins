@@ -1,10 +1,10 @@
 {
-  "$schema": "https://raw.githubusercontent.com/anthropics/claude-code/main/schemas/plugin.schema.json",
+  "$schema": "https://anthropic.com/claude-code/plugin.schema.json",
   "name": "react-native-design",
   "description": "Complete React Native/Expo development toolkit: UI design standards, agents, code quality tools, and product refinement.",
   "version": "1.3.0",
   "author": "steve",
-  "repository": "https://github.com/yourusername/plugins",
+  "repository": "https://github.com/slaguardia/claude-code-plugins",
   "components": {
     "agents": [
       {

@@ -6,23 +6,19 @@ A curated collection of Claude Code plugins for React Native development, Next.j
 
 ### Add the Marketplace
 
-```bash
-claude mcp add-from-claude-desktop https://github.com/slaguardia/claude-code-plugins
+```
+/plugin marketplace add slaguardia/claude-code-plugins
 ```
 
-Or manually add to your Claude Code settings:
+Or with full URL:
 
-```json
-{
-  "pluginMarketplaces": [
-    "https://github.com/slaguardia/claude-code-plugins"
-  ]
-}
+```
+/plugin marketplace add https://github.com/slaguardia/claude-code-plugins
 ```
 
 ### Install a Plugin
 
-```bash
+```
 /plugin install react-native-design@slaguardia/claude-code-plugins
 ```
 
@@ -123,33 +119,39 @@ Database migration tools for Flyway.
 ```
 claude-code-plugins/
 ├── .claude-plugin/
-│   └── marketplace.json       # Marketplace metadata
+│   └── marketplace.json        # Marketplace metadata
 ├── plugins/
 │   ├── react-native-design/
-│   │   ├── plugin.json        # Plugin metadata
-│   │   ├── README.md          # Plugin documentation
-│   │   ├── agents/            # Agent definitions
-│   │   ├── skills/            # Skill definitions
-│   │   └── commands/          # Slash commands
+│   │   ├── .claude-plugin/
+│   │   │   └── plugin.json     # Plugin metadata
+│   │   ├── README.md
+│   │   ├── agents/
+│   │   ├── skills/
+│   │   └── commands/
 │   ├── ralph-linear/
-│   │   ├── plugin.json
+│   │   ├── .claude-plugin/
+│   │   │   └── plugin.json
 │   │   ├── README.md
 │   │   ├── skills/
 │   │   └── commands/
 │   ├── compliance-auditor/
-│   │   ├── plugin.json
+│   │   ├── .claude-plugin/
+│   │   │   └── plugin.json
 │   │   ├── README.md
 │   │   └── commands/
 │   ├── claude-docs/
-│   │   ├── plugin.json
+│   │   ├── .claude-plugin/
+│   │   │   └── plugin.json
 │   │   ├── README.md
 │   │   └── commands/
 │   ├── nextjs-development/
-│   │   ├── plugin.json
+│   │   ├── .claude-plugin/
+│   │   │   └── plugin.json
 │   │   ├── README.md
 │   │   └── commands/
 │   └── database-migration/
-│       ├── plugin.json
+│       ├── .claude-plugin/
+│       │   └── plugin.json
 │       ├── README.md
 │       └── commands/
 └── README.md
@@ -185,7 +187,9 @@ Each plugin follows the standard Claude Code plugin structure:
 
 ```
 plugin-name/
-├── plugin.json          # Plugin metadata (required)
+├── .claude-plugin/
+│   └── plugin.json      # Plugin metadata (required)
+├── .mcp.json            # MCP server configuration (optional)
 ├── README.md            # Documentation
 ├── commands/            # Slash commands (optional)
 │   └── command-name.md
