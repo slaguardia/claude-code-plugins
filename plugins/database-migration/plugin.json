@@ -1,0 +1,18 @@
+{
+  "$schema": "https://raw.githubusercontent.com/anthropics/claude-code/main/schemas/plugin.schema.json",
+  "name": "database-migration",
+  "description": "Database migration tools for Flyway, including running migrations, fixing common errors, and managing SQL files.",
+  "version": "1.0.0",
+  "author": "steve",
+  "repository": "https://github.com/yourusername/plugins",
+  "components": {
+    "commands": [
+      {
+        "name": "migrate",
+        "description": "Run Flyway database migrations and resolve any errors.",
+        "path": "commands/migrate.md"
+      }
+    ]
+  },
+  "tags": ["database", "flyway", "migrations", "sql", "postgresql"]
+}

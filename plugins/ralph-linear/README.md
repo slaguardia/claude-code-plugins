@@ -1,155 +1,95 @@
 # Ralph Linear Plugin
 
-Autonomous AI agent loop for Claude Code. Implements user stories from Linear issues one at a time, with fresh context per iteration.
+Complete Linear workflow automation: planning issues with user stories, async collaboration, and autonomous implementation via the Ralph Wiggum loop.
 
-Based on [Geoffrey Huntley's Ralph methodology](https://github.com/snarktank/ralph).
+## Features
 
----
+### Skills
 
-## How It Works
+- **ralph** - Execute one Ralph Wiggum loop iteration. Implements user stories one at a time with fresh context per iteration.
+- **interactive-planning** - Create Linear issues with user stories and acceptance criteria through interactive Q&A.
+- **headless-planning** - Async planning via Linear issue descriptions. Questions and answers happen directly in the issue.
 
-```
-+-------------------------------------------------------------+
-|                      ralph.sh (loop)                         |
-|  +-----------------------------------------------------+    |
-|  |  Iteration 1: Fresh Claude instance                  |    |
-|  |  -> Read Linear issues                               |    |
-|  |  -> Pick next incomplete story                       |    |
-|  |  -> Implement, test, commit                          |    |
-|  |  -> Mark complete in Linear                          |    |
-|  |  -> Append learnings to progress.txt                 |    |
-|  |  -> Exit                                             |    |
-|  +-----------------------------------------------------+    |
-|                           |                                  |
-|  +-----------------------------------------------------+    |
-|  |  Iteration 2: Fresh Claude instance                  |    |
-|  |  -> (same flow, picks next story)                    |    |
-|  +-----------------------------------------------------+    |
-|                           |                                  |
-|                         ...                                  |
-|                           |                                  |
-|              <promise>COMPLETE</promise>                     |
-|                      (all done)                              |
-+-------------------------------------------------------------+
-```
+### Commands
 
-**Key principle:** Each iteration gets fresh context. Memory persists through:
+- **process-feedback** - Review and improve Linear Feedback project issues with better titles and descriptions.
+- **update-changelog** - Generate changelog entries for the current app version from recent commits.
 
-- Linear issue state (source of truth)
-- Git commits (implementation history)
-- `progress.txt` (learnings and patterns)
+## Installation
 
----
-
-## Quick Start
-
-### 1. Install the Plugin
-
-Add to your project's `.claude/settings.json`:
-
-```json
-{
-  "plugins": {
-    "marketplaces": {
-      "your-marketplace": {
-        "url": "https://github.com/your-username/plugins",
-        "autoInstall": true
-      }
-    }
-  }
-}
-```
-
-### 2. Create Linear Issues
-
-Structure your work as a parent issue with sub-issues (user stories):
-
-- **Parent:** "Add feature X" (PD-123)
-  - **Sub-issue:** US-001 - First story (PD-124)
-  - **Sub-issue:** US-002 - Second story (PD-125)
-  - **Sub-issue:** US-003 - Third story (PD-126)
-
-### 3. Run Ralph
+Add to your Claude Code plugins:
 
 ```bash
-# Single iteration (in Claude Code chat)
-/ralph PD-123
-
-# Autonomous loop (runs until complete)
-./ralph.sh PD-123
+claude plugins add ralph-linear
 ```
 
----
+## Dependencies
 
-## Usage Modes
+Requires the Linear MCP server to be configured:
+- `mcp: linear-server`
 
-### Mode 1: Single Iteration
+## Usage
 
-Run one story at a time with oversight:
+### Ralph (Autonomous Implementation)
 
 ```
 /ralph PD-123
 ```
 
-Review the implementation, then run again for the next story.
+Executes one iteration:
+1. Fetches parent issue and sub-issues from Linear
+2. Selects next incomplete user story (US-XXX)
+3. Implements the story following acceptance criteria
+4. Runs quality checks (TypeScript, lint, format)
+5. Commits changes
+6. Marks sub-issue as Done in Linear
+7. Logs progress and exits for fresh context
 
-### Mode 2: Autonomous Loop
+### Interactive Planning
 
-Let Ralph run unattended:
-
-```bash
-./scripts/ralph.sh PD-123 --max-iterations 20
+```
+/interactive-planning [feature description]
 ```
 
-Ralph will:
+Creates structured Linear issues through Q&A:
+1. Ask clarifying questions with lettered options
+2. Generate parent issue with feature design
+3. Create sub-issues for each user story
+4. Review with user before creating in Linear
 
-- Spawn fresh Claude Code instances
-- Implement stories one by one
-- Stop when all complete or max iterations reached
+### Headless Planning
 
-### Mode 3: Hybrid
-
-Start autonomous, then take over:
-
-```bash
-# Run 5 iterations autonomously
-./scripts/ralph.sh PD-123 --max-iterations 5
-
-# Review progress, then continue manually
-/ralph PD-123
+```
+/headless-planning [feature description]
+/headless-planning PD-123  # Continue existing issue
 ```
 
----
+Async planning workflow:
+1. Creates Linear issue with embedded questions
+2. User answers by editing issue description
+3. User runs command again to continue
+4. Claude creates sub-issues when ready
 
-## Linear Integration
+### Process Feedback
 
-Ralph reads from and writes to Linear:
+```
+/process-feedback
+```
 
-| Action         | Linear Update              |
-| -------------- | -------------------------- |
-| Start story    | Sub-issue -> "In Progress" |
-| Complete story | Sub-issue -> "Done"        |
-| Hit blocker    | Comment added to sub-issue |
+Reviews unprocessed feedback issues and improves titles/descriptions.
 
-Parent issue stays open until all sub-issues are done.
+### Update Changelog
 
----
+```
+/update-changelog
+```
 
-## Requirements
+Generates changelog from recent commits for current version.
 
-- Claude Code CLI installed
-- Linear MCP server configured (`mcp__linear-server`)
-- Git repository
-- `jq` (for JSON parsing in bash loop)
+## Workflow Example
 
----
-
-## Files
-
-| File                      | Purpose                                      |
-| ------------------------- | -------------------------------------------- |
-| `plugin.json`             | Plugin manifest                              |
-| `skills/ralph/SKILL.md`   | Execution skill invoked by `/ralph`          |
-| `skills/ralph/prompt.md`  | Instructions for each iteration              |
-| `scripts/ralph.sh`        | Bash loop that spawns fresh Claude instances |
-| `README.md`               | This file                                    |
+1. Plan feature: `/interactive-planning add host messaging`
+2. Review generated issues in Linear
+3. Start implementation: `/ralph PD-123`
+4. Repeat ralph for each user story
+5. Prepare for merge: `/update-changelog`

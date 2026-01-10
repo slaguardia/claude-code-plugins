@@ -1,0 +1,23 @@
+{
+  "$schema": "https://raw.githubusercontent.com/anthropics/claude-code/main/schemas/plugin.schema.json",
+  "name": "claude-docs",
+  "description": "Tools for managing CLAUDE.md documentation - capturing session learnings and syncing docs with codebase.",
+  "version": "1.2.0",
+  "author": "steve",
+  "repository": "https://github.com/yourusername/plugins",
+  "components": {
+    "commands": [
+      {
+        "name": "capture-learnings",
+        "description": "Capture insights, fixes, and patterns discovered during a session into project documentation.",
+        "path": "commands/capture-learnings.md"
+      },
+      {
+        "name": "update-docs",
+        "description": "Sync all documentation with current codebase state (structure, dependencies, routes).",
+        "path": "commands/update-docs.md"
+      }
+    ]
+  },
+  "tags": ["documentation", "claude-md", "context", "maintenance", "learnings"]
+}
