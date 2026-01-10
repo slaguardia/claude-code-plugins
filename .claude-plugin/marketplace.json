@@ -1,0 +1,16 @@
+{
+  "$schema": "https://raw.githubusercontent.com/anthropics/claude-code/main/schemas/marketplace.schema.json",
+  "name": "Steve's Plugin Marketplace",
+  "description": "A curated collection of Claude Code plugins",
+  "version": "1.0.0",
+  "plugins": [
+    {
+      "name": "ralph-linear",
+      "description": "Autonomous AI agent loop for implementing Linear issues. Executes user stories one at a time with fresh context per iteration.",
+      "path": "plugins/ralph-linear",
+      "version": "1.0.0",
+      "author": "steve",
+      "tags": ["automation", "linear", "agent-loop", "productivity"]
+    }
+  ]
+}

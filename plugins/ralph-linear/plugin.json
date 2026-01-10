@@ -1,0 +1,20 @@
+{
+  "$schema": "https://raw.githubusercontent.com/anthropics/claude-code/main/schemas/plugin.schema.json",
+  "name": "ralph-linear",
+  "description": "Autonomous AI agent loop for implementing Linear issues. Executes user stories one at a time with fresh context per iteration.",
+  "version": "1.0.0",
+  "author": "steve",
+  "repository": "https://github.com/ivan-magda/claude-code-plugin-template",
+  "components": {
+    "skills": [
+      {
+        "name": "ralph",
+        "description": "Execute one Ralph Wiggum loop iteration. Reads Linear issues, implements next incomplete story, runs quality checks, marks complete.",
+        "path": "skills/ralph/SKILL.md"
+      }
+    ]
+  },
+  "dependencies": {
+    "mcp": ["linear-server"]
+  }
+}

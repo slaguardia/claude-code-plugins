@@ -1,0 +1,10 @@
+{
+  "plugins": {
+    "marketplaces": {
+      "self": {
+        "url": ".",
+        "autoInstall": true
+      }
+    }
+  }
+}
