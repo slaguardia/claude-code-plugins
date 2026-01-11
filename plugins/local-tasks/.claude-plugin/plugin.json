@@ -1,0 +1,35 @@
+{
+  "$schema": "https://anthropic.com/claude-code/plugin.schema.json",
+  "name": "local-tasks",
+  "description": "Complete local task workflow automation: planning with user stories, interactive/headless collaboration, and autonomous implementation via the Ralph Wiggum loop. All tasks stored in local JSON files.",
+  "version": "1.0.0",
+  "author": "steve",
+  "repository": "https://github.com/slaguardia/claude-code-plugins",
+  "components": {
+    "skills": [
+      {
+        "name": "ralph",
+        "description": "Execute one Ralph Wiggum loop iteration. Reads local JSON tasks, implements next incomplete story, runs quality checks, marks complete.",
+        "path": "skills/ralph/SKILL.md"
+      },
+      {
+        "name": "interactive-planning",
+        "description": "Create detailed local task files with user stories and acceptance criteria through interactive Q&A.",
+        "path": "skills/interactive-planning/SKILL.md"
+      },
+      {
+        "name": "headless-planning",
+        "description": "Async iterative planning via markdown files. Questions and answers happen in a planning document.",
+        "path": "skills/headless-planning/SKILL.md"
+      }
+    ],
+    "commands": [
+      {
+        "name": "import-tasks",
+        "description": "Import tasks from a markdown file into local JSON task format.",
+        "path": "commands/import-tasks.md"
+      }
+    ]
+  },
+  "tags": ["planning", "automation", "agent-loop", "productivity", "user-stories", "local", "json", "tasks", "markdown"]
+}
