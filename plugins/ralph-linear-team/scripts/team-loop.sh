@@ -7,7 +7,8 @@
 set -e
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-PLUGIN_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
+PLANNING_PROMPT="$SCRIPT_DIR/planning-agent.md"
+RESEARCH_PROMPT="$SCRIPT_DIR/research-agent.md"
 
 # Colors for output
 RED='\033[0;31m'
@@ -146,8 +147,13 @@ update_state() {
 
 # Build Planning Agent prompt
 build_planning_prompt() {
+    if [[ ! -f "$PLANNING_PROMPT" ]]; then
+        echo -e "${RED}Error: planning-agent.md not found at $PLANNING_PROMPT${NC}" >&2
+        echo "Make sure you copied all files: team-loop.sh, planning-agent.md, research-agent.md" >&2
+        exit 1
+    fi
     local context=$(cat "$CONTEXT_FILE")
-    local prompt=$(cat "$PLUGIN_DIR/prompts/planning-agent.md")
+    local prompt=$(cat "$PLANNING_PROMPT")
 
     # Replace context placeholder
     echo "$prompt" | sed "s|{{CONTEXT}}|$context|g"
@@ -155,8 +161,13 @@ build_planning_prompt() {
 
 # Build Research Agent prompt
 build_research_prompt() {
+    if [[ ! -f "$RESEARCH_PROMPT" ]]; then
+        echo -e "${RED}Error: research-agent.md not found at $RESEARCH_PROMPT${NC}" >&2
+        echo "Make sure you copied all files: team-loop.sh, planning-agent.md, research-agent.md" >&2
+        exit 1
+    fi
     local context=$(cat "$CONTEXT_FILE")
-    local prompt=$(cat "$PLUGIN_DIR/prompts/research-agent.md")
+    local prompt=$(cat "$RESEARCH_PROMPT")
 
     # Replace context placeholder
     echo "$prompt" | sed "s|{{CONTEXT}}|$context|g"

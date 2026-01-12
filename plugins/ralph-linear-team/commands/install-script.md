@@ -5,20 +5,22 @@ allowed-tools: ["Bash"]
 
 # Install Team Loop Script
 
-Copy the `team-loop.sh` script from the plugin to your current project directory.
+Copy the `team-loop.sh` script and its prompt files to your current project directory.
 
 ## Instructions
 
-Run this command to copy the script:
+Run these commands to copy the files:
 
 ```bash
 cp "${CLAUDE_PLUGIN_ROOT}/scripts/team-loop.sh" ./team-loop.sh && chmod +x ./team-loop.sh
+cp "${CLAUDE_PLUGIN_ROOT}/scripts/planning-agent.md" ./planning-agent.md
+cp "${CLAUDE_PLUGIN_ROOT}/scripts/research-agent.md" ./research-agent.md
 ```
 
 Then confirm success:
 
 ```bash
-ls -la ./team-loop.sh
+ls -la ./team-loop.sh ./planning-agent.md ./research-agent.md
 ```
 
 ## After Installation

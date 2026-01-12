@@ -7,7 +7,7 @@
 set -e
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-PLUGIN_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
+PROMPT_FILE="$SCRIPT_DIR/ralph-prompt.md"
 
 # Colors for output
 RED='\033[0;31m'
@@ -198,7 +198,12 @@ run_loop() {
         echo ""
 
         # Create the prompt with the issue ID
-        PROMPT=$(cat "$PLUGIN_DIR/skills/ralph/prompt.md" | sed "s/{{LINEAR_ISSUE_ID}}/$LINEAR_ISSUE_ID/g")
+        if [[ ! -f "$PROMPT_FILE" ]]; then
+            echo -e "${RED}Error: ralph-prompt.md not found at $PROMPT_FILE${NC}"
+            echo "Make sure you copied both ralph.sh and ralph-prompt.md"
+            exit 1
+        fi
+        PROMPT=$(cat "$PROMPT_FILE" | sed "s/{{LINEAR_ISSUE_ID}}/$LINEAR_ISSUE_ID/g")
 
         # Run Claude with the prompt
         OUTPUT=$(echo "$PROMPT" | claude --dangerously-skip-permissions 2>&1) || true
