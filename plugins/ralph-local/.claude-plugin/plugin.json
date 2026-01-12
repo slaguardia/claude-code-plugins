@@ -1,6 +1,6 @@
 {
   "$schema": "https://anthropic.com/claude-code/plugin.schema.json",
-  "name": "local-tasks",
+  "name": "ralph-local",
   "description": "Complete local task workflow automation: planning with user stories, interactive/headless collaboration, and autonomous implementation via the Ralph Wiggum loop. All tasks stored in local JSON files.",
   "version": "1.0.0",
   "author": "steve",

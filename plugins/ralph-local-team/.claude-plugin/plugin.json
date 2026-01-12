@@ -1,6 +1,6 @@
 {
   "$schema": "https://anthropic.com/claude-code/plugin.schema.json",
-  "name": "local-tasks-team",
+  "name": "ralph-local-team",
   "description": "Two-agent adversarial planning loop: Planning Agent creates user stories, Research Agent validates with web research. Loop until comprehensive, then save tasks to local JSON files.",
   "version": "1.0.0",
   "author": "steve",
