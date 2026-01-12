@@ -8,5 +8,6 @@
   "repository": "https://github.com/slaguardia/claude-code-plugins",
   "keywords": ["planning", "research", "multi-agent", "adversarial", "user-stories", "local", "json", "tasks"],
   "skills": "./skills/",
+  "commands": "./commands/",
   "scripts": "./scripts/"
 }
