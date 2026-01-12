@@ -7,5 +7,6 @@
   },
   "repository": "https://github.com/slaguardia/claude-code-plugins",
   "keywords": ["linear", "planning", "research", "multi-agent", "adversarial", "user-stories", "web-search"],
-  "skills": "./skills/"
+  "skills": "./skills/",
+  "scripts": "./scripts/"
 }

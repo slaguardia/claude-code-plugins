@@ -8,5 +8,6 @@
   "repository": "https://github.com/slaguardia/claude-code-plugins",
   "keywords": ["linear", "planning", "automation", "agent-loop", "productivity", "user-stories"],
   "skills": "./skills/",
-  "commands": "./commands/"
+  "commands": "./commands/",
+  "scripts": "./scripts/"
 }
