@@ -1,6 +1,6 @@
 {
   "name": "ralph-local-team",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Two-agent adversarial planning loop: Planning Agent creates user stories, Research Agent validates with web research. Loop until comprehensive, then save tasks to local JSON files.",
   "author": {
     "name": "Steven LaGuardia"

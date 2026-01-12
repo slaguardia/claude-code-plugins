@@ -12,7 +12,7 @@
       "name": "ralph-linear",
       "description": "Complete Linear workflow automation: planning issues with user stories, async collaboration, and autonomous implementation via the Ralph Wiggum loop.",
       "source": "./plugins/ralph-linear",
-      "version": "1.1.0",
+      "version": "1.2.0",
       "category": "productivity",
       "author": {
         "name": "steve"
@@ -23,7 +23,7 @@
       "name": "ralph-local",
       "description": "Complete local task workflow automation: planning with user stories, interactive/headless collaboration, and autonomous implementation via the Ralph Wiggum loop. All tasks stored in local JSON files.",
       "source": "./plugins/ralph-local",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "category": "productivity",
       "author": {
         "name": "steve"
@@ -34,7 +34,7 @@
       "name": "ralph-local-team",
       "description": "Two-agent adversarial planning loop: Planning Agent creates user stories, Research Agent validates with web research. Loop until comprehensive, then save tasks to local JSON files.",
       "source": "./plugins/ralph-local-team",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "category": "productivity",
       "author": {
         "name": "steve"
@@ -45,7 +45,7 @@
       "name": "ralph-linear-team",
       "description": "Two-agent adversarial planning loop: Planning Agent creates user stories, Research Agent validates with web research. Loop until comprehensive, then create Linear issues.",
       "source": "./plugins/ralph-linear-team",
-      "version": "1.0.0",
+      "version": "1.1.0",
       "category": "productivity",
       "author": {
         "name": "steve"
