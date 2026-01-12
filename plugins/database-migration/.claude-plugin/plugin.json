@@ -1,18 +1,11 @@
 {
-  "$schema": "https://anthropic.com/claude-code/plugin.schema.json",
   "name": "database-migration",
-  "description": "Database migration tools for Flyway, including running migrations, fixing common errors, and managing SQL files.",
   "version": "1.0.0",
-  "author": "steve",
-  "repository": "https://github.com/slaguardia/claude-code-plugins",
-  "components": {
-    "commands": [
-      {
-        "name": "migrate",
-        "description": "Run Flyway database migrations and resolve any errors.",
-        "path": "commands/migrate.md"
-      }
-    ]
+  "description": "Database migration tools for Flyway, including running migrations, fixing common errors, and managing SQL files.",
+  "author": {
+    "name": "Steven LaGuardia"
   },
-  "tags": ["database", "flyway", "migrations", "sql", "postgresql"]
+  "repository": "https://github.com/slaguardia/claude-code-plugins",
+  "keywords": ["database", "flyway", "migrations", "sql", "postgresql"],
+  "commands": "./commands/"
 }

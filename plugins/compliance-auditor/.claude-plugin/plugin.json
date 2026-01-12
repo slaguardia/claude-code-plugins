@@ -1,53 +1,11 @@
 {
-  "$schema": "https://anthropic.com/claude-code/plugin.schema.json",
   "name": "compliance-auditor",
-  "description": "Comprehensive compliance auditing tools for app policies, privacy, terms of service, DMCA, community guidelines, and App Store compliance.",
   "version": "1.0.0",
-  "author": "steve",
-  "repository": "https://github.com/slaguardia/claude-code-plugins",
-  "components": {
-    "commands": [
-      {
-        "name": "apple-compliance",
-        "description": "Audit app for Apple App Store Review Guidelines compliance.",
-        "path": "commands/apple-compliance.md"
-      },
-      {
-        "name": "privacy-audit",
-        "description": "Audit privacy policy for GDPR, CCPA/CPRA, and global privacy framework compliance.",
-        "path": "commands/privacy-audit.md"
-      },
-      {
-        "name": "terms-audit",
-        "description": "Audit terms of service for clarity, enforceability, and legal compliance.",
-        "path": "commands/terms-audit.md"
-      },
-      {
-        "name": "dmca-audit",
-        "description": "Audit DMCA/copyright policy for compliance with 17 U.S.C. § 512.",
-        "path": "commands/dmca-audit.md"
-      },
-      {
-        "name": "guidelines-audit",
-        "description": "Audit community guidelines for clarity, completeness, and consistency.",
-        "path": "commands/guidelines-audit.md"
-      },
-      {
-        "name": "policy-cohesion",
-        "description": "Audit all policy documents together for cohesiveness, tone, and structural alignment.",
-        "path": "commands/policy-cohesion.md"
-      },
-      {
-        "name": "welcome-screen-audit",
-        "description": "Audit welcome and authentication screens against modern UX best practices.",
-        "path": "commands/welcome-screen-audit.md"
-      },
-      {
-        "name": "modal-audit",
-        "description": "Audit all modal components for consistency in close buttons, cancel buttons, and styling.",
-        "path": "commands/modal-audit.md"
-      }
-    ]
+  "description": "Comprehensive compliance auditing tools for app policies, privacy, terms of service, DMCA, community guidelines, and App Store compliance.",
+  "author": {
+    "name": "Steven LaGuardia"
   },
-  "tags": ["compliance", "privacy", "legal", "app-store", "gdpr", "ccpa", "dmca", "audit"]
+  "repository": "https://github.com/slaguardia/claude-code-plugins",
+  "keywords": ["compliance", "privacy", "legal", "app-store", "gdpr", "ccpa", "dmca", "audit"],
+  "commands": "./commands/"
 }

@@ -1,21 +1,11 @@
 {
-  "$schema": "https://anthropic.com/claude-code/plugin.schema.json",
   "name": "ralph-linear-team",
-  "description": "Two-agent adversarial planning loop: Planning Agent creates user stories, Research Agent validates with web research. Loop until comprehensive, then create Linear issues.",
   "version": "1.0.0",
-  "author": "steve",
+  "description": "Two-agent adversarial planning loop: Planning Agent creates user stories, Research Agent validates with web research. Loop until comprehensive, then create Linear issues.",
+  "author": {
+    "name": "Steven LaGuardia"
+  },
   "repository": "https://github.com/slaguardia/claude-code-plugins",
-  "components": {
-    "skills": [
-      {
-        "name": "team-planning",
-        "description": "Execute adversarial planning loop. Planning and Research agents alternate until comprehensive user stories are ready, then create Linear issues.",
-        "path": "skills/team-planning/SKILL.md"
-      }
-    ]
-  },
-  "dependencies": {
-    "mcp": ["linear-server"]
-  },
-  "tags": ["linear", "planning", "research", "multi-agent", "adversarial", "user-stories", "web-search"]
+  "keywords": ["linear", "planning", "research", "multi-agent", "adversarial", "user-stories", "web-search"],
+  "skills": "./skills/"
 }

@@ -1,72 +1,13 @@
 {
-  "$schema": "https://anthropic.com/claude-code/plugin.schema.json",
   "name": "react-native-design",
-  "description": "Complete React Native/Expo development toolkit: UI design standards, agents, code quality tools, and product refinement.",
   "version": "1.3.0",
-  "author": "steve",
-  "repository": "https://github.com/slaguardia/claude-code-plugins",
-  "components": {
-    "agents": [
-      {
-        "name": "design-agent",
-        "description": "Expert on project UI development standards, focused on implementing clean, non-cluttered, and modern user interfaces with glassmorphism.",
-        "path": "agents/design-agent.md"
-      },
-      {
-        "name": "modal-agent",
-        "description": "Specialized agent for creating, auditing, and fixing modal components following consistent design patterns.",
-        "path": "agents/modal-agent.md"
-      },
-      {
-        "name": "form-handler",
-        "description": "Form implementation expert for React Native. Handles form state, image caching, validation, and modal transitions.",
-        "path": "agents/form-handler.md"
-      },
-      {
-        "name": "cache-agent",
-        "description": "Expert in React Query cache management and optimistic mutations for minimal loading states and seamless UX.",
-        "path": "agents/cache-agent.md"
-      },
-      {
-        "name": "merge-agent",
-        "description": "Pre-merge preparation agent that ensures code quality, runs checks, and prepares changes for review.",
-        "path": "agents/merge-agent.md"
-      }
-    ],
-    "skills": [
-      {
-        "name": "ui-design",
-        "description": "React Native UI design principles, component patterns, spacing standards, and accessibility guidelines.",
-        "path": "skills/ui-design/SKILL.md"
-      },
-      {
-        "name": "useeffect-patterns",
-        "description": "React useEffect best practices from official docs. Learn when NOT to use Effect and better alternatives.",
-        "path": "skills/useeffect-patterns/SKILL.md"
-      }
-    ],
-    "commands": [
-      {
-        "name": "lint",
-        "description": "Run comprehensive linting and type checking for React Native/Expo projects.",
-        "path": "commands/lint.md"
-      },
-      {
-        "name": "architecture-audit",
-        "description": "Audit project architecture for patterns, structure, and best practices compliance.",
-        "path": "commands/architecture-audit.md"
-      },
-      {
-        "name": "accessibility-audit",
-        "description": "Audit app for iOS Dynamic Type support and accessibility compliance.",
-        "path": "commands/accessibility-audit.md"
-      },
-      {
-        "name": "cook",
-        "description": "Audit and refine codebase to align with product spec. Taste-driven refinement by a senior product engineer.",
-        "path": "commands/cook.md"
-      }
-    ]
+  "description": "Complete React Native/Expo development toolkit: UI design standards, agents, code quality tools, and product refinement.",
+  "author": {
+    "name": "Steven LaGuardia"
   },
-  "tags": ["react-native", "expo", "ui-design", "forms", "modals", "react-query", "hooks", "linting", "accessibility", "architecture", "product"]
+  "repository": "https://github.com/slaguardia/claude-code-plugins",
+  "keywords": ["react-native", "expo", "ui-design", "forms", "modals", "react-query", "hooks", "linting", "accessibility", "architecture", "product"],
+  "agents": "./agents/",
+  "skills": "./skills/",
+  "commands": "./commands/"
 }

@@ -1,23 +1,11 @@
 {
-  "$schema": "https://anthropic.com/claude-code/plugin.schema.json",
   "name": "nextjs-development",
-  "description": "Next.js development tools including comprehensive linting, documentation management, and best practices for App Router projects with pnpm.",
   "version": "1.0.0",
-  "author": "steve",
-  "repository": "https://github.com/slaguardia/claude-code-plugins",
-  "components": {
-    "commands": [
-      {
-        "name": "lint",
-        "description": "Run comprehensive linting suite (TypeScript, ESLint, Prettier, Depcheck) for Next.js/pnpm projects.",
-        "path": "commands/lint.md"
-      },
-      {
-        "name": "update-docs",
-        "description": "Review and update all CLAUDE.md documentation files to match current codebase structure.",
-        "path": "commands/update-docs.md"
-      }
-    ]
+  "description": "Next.js development tools including comprehensive linting, documentation management, and best practices for App Router projects with pnpm.",
+  "author": {
+    "name": "Steven LaGuardia"
   },
-  "tags": ["nextjs", "app-router", "pnpm", "typescript", "eslint", "prettier", "documentation", "linting"]
+  "repository": "https://github.com/slaguardia/claude-code-plugins",
+  "keywords": ["nextjs", "app-router", "pnpm", "typescript", "eslint", "prettier", "documentation", "linting"],
+  "commands": "./commands/"
 }

@@ -1,43 +1,12 @@
 {
-  "$schema": "https://anthropic.com/claude-code/plugin.schema.json",
   "name": "ralph-linear",
-  "description": "Complete Linear workflow automation: planning issues with user stories, async collaboration, and autonomous implementation via the Ralph Wiggum loop.",
   "version": "1.1.0",
-  "author": "steve",
+  "description": "Complete Linear workflow automation: planning issues with user stories, async collaboration, and autonomous implementation via the Ralph Wiggum loop.",
+  "author": {
+    "name": "Steven LaGuardia"
+  },
   "repository": "https://github.com/slaguardia/claude-code-plugins",
-  "components": {
-    "skills": [
-      {
-        "name": "ralph",
-        "description": "Execute one Ralph Wiggum loop iteration. Reads Linear issues, implements next incomplete story, runs quality checks, marks complete.",
-        "path": "skills/ralph/SKILL.md"
-      },
-      {
-        "name": "interactive-planning",
-        "description": "Create detailed Linear issues with user stories and acceptance criteria through interactive Q&A.",
-        "path": "skills/interactive-planning/SKILL.md"
-      },
-      {
-        "name": "headless-planning",
-        "description": "Async iterative planning via Linear issue descriptions. Questions and answers happen directly in the issue.",
-        "path": "skills/headless-planning/SKILL.md"
-      }
-    ],
-    "commands": [
-      {
-        "name": "process-feedback",
-        "description": "Review and improve Linear Feedback project issues with better titles and descriptions.",
-        "path": "commands/process-feedback.md"
-      },
-      {
-        "name": "update-changelog",
-        "description": "Generate changelog entries for the current app version from recent commits.",
-        "path": "commands/update-changelog.md"
-      }
-    ]
-  },
-  "dependencies": {
-    "mcp": ["linear-server"]
-  },
-  "tags": ["linear", "planning", "automation", "agent-loop", "productivity", "user-stories"]
+  "keywords": ["linear", "planning", "automation", "agent-loop", "productivity", "user-stories"],
+  "skills": "./skills/",
+  "commands": "./commands/"
 }

@@ -1,18 +1,11 @@
 {
-  "$schema": "https://anthropic.com/claude-code/plugin.schema.json",
   "name": "ralph-local-team",
-  "description": "Two-agent adversarial planning loop: Planning Agent creates user stories, Research Agent validates with web research. Loop until comprehensive, then save tasks to local JSON files.",
   "version": "1.0.0",
-  "author": "steve",
-  "repository": "https://github.com/slaguardia/claude-code-plugins",
-  "components": {
-    "skills": [
-      {
-        "name": "team-planning",
-        "description": "Execute adversarial planning loop. Planning and Research agents alternate until comprehensive user stories are ready, then save to local JSON task files.",
-        "path": "skills/team-planning/SKILL.md"
-      }
-    ]
+  "description": "Two-agent adversarial planning loop: Planning Agent creates user stories, Research Agent validates with web research. Loop until comprehensive, then save tasks to local JSON files.",
+  "author": {
+    "name": "Steven LaGuardia"
   },
-  "tags": ["planning", "research", "multi-agent", "adversarial", "user-stories", "local", "json", "tasks"]
+  "repository": "https://github.com/slaguardia/claude-code-plugins",
+  "keywords": ["planning", "research", "multi-agent", "adversarial", "user-stories", "local", "json", "tasks"],
+  "skills": "./skills/"
 }
