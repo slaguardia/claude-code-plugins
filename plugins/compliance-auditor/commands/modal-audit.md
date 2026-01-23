@@ -1,3 +1,7 @@
+---
+description: Audit modal components for consistency in close buttons and styling
+---
+
 # Modal Audit
 
 Audit all modal components for consistency in close buttons, cancel buttons, and styling.

@@ -1,3 +1,7 @@
+---
+description: Run comprehensive linting suite for Next.js projects
+---
+
 # Lint Command
 
 Run the comprehensive linting suite for Next.js projects with pnpm. This includes TypeScript type checking, ESLint, Prettier, and dependency checking.

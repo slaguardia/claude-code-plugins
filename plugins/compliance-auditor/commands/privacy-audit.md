@@ -1,3 +1,7 @@
+---
+description: Audit privacy policy for GDPR, CCPA, and global privacy compliance
+---
+
 # Privacy Policy Audit
 
 Audit privacy policy for GDPR, CPRA/CCPA, BIPA, and global privacy framework compliance.

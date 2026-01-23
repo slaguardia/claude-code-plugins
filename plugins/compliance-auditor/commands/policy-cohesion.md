@@ -1,3 +1,7 @@
+---
+description: Review all policy documents for cohesiveness and tone consistency
+---
+
 # Policy Cohesion Audit
 
 Review all policy documents together for cohesiveness, tone consistency, and structural alignment.

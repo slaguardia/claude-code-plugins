@@ -1,3 +1,7 @@
+---
+description: Audit terms of service for clarity and legal compliance
+---
+
 # Terms of Service Audit
 
 Audit terms of service for clarity, enforceability, and legal compliance.

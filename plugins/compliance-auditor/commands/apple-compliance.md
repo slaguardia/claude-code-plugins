@@ -1,3 +1,7 @@
+---
+description: Audit app for Apple App Store Review Guidelines compliance
+---
+
 # Apple App Store Compliance Audit
 
 Thoroughly audit app for compliance with Apple's App Store Review Guidelines.

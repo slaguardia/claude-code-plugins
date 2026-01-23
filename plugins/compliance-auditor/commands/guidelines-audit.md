@@ -1,3 +1,7 @@
+---
+description: Audit community guidelines for clarity and completeness
+---
+
 # Community Guidelines Audit
 
 Audit community guidelines for clarity, completeness, and consistency.

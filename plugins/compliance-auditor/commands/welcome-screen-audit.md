@@ -1,3 +1,7 @@
+---
+description: Audit welcome and auth screens against modern UX best practices
+---
+
 # Welcome Screen Audit
 
 Audit welcome and authentication screens against modern (2024-2025) UX best practices.

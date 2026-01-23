@@ -1,3 +1,7 @@
+---
+description: Import tasks from markdown into local JSON format
+---
+
 # Import Tasks from Markdown
 
 Import tasks from a markdown file into local JSON task format.

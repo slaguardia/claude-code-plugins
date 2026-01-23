@@ -1,3 +1,7 @@
+---
+description: Audit DMCA policy for 17 U.S.C. § 512 compliance
+---
+
 # DMCA/Copyright Policy Audit
 
 Audit DMCA policy for compliance with 17 U.S.C. § 512.

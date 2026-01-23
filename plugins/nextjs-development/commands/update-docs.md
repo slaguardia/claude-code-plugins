@@ -1,3 +1,7 @@
+---
+description: Update CLAUDE.md files to reflect current codebase
+---
+
 # Update Documentation Command
 
 Review and update all CLAUDE.md files and documentation to ensure they accurately reflect the current codebase structure, patterns, and conventions.

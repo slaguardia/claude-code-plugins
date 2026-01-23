@@ -1,3 +1,7 @@
+---
+description: Audit codebase against industry-standard mobile architecture patterns
+---
+
 # Architecture Audit Command
 
 Audit React Native codebase against industry-standard mobile app architecture patterns from Twitter, TikTok, Instagram, and other major social apps.

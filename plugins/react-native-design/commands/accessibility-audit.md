@@ -1,3 +1,7 @@
+---
+description: Audit React Native codebase for iOS Dynamic Type and accessibility
+---
+
 # Accessibility Audit Command
 
 Audit React Native codebase for iOS Dynamic Type and pragmatic accessibility issues. Focus on real-world layout breakage risks, not strict WCAG compliance.

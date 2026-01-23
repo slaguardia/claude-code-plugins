@@ -1,3 +1,7 @@
+---
+description: Run comprehensive linting for React Native/Expo projects
+---
+
 # Lint Command
 
 Run comprehensive linting and type checking for React Native/Expo projects.

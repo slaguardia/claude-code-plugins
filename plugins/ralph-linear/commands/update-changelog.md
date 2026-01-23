@@ -1,3 +1,7 @@
+---
+description: Generate changelog entry from recent commits
+---
+
 # Update Changelog Command
 
 Generate a changelog entry for the current app version from recent commits.

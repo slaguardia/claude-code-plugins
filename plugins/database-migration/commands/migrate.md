@@ -1,3 +1,7 @@
+---
+description: Run Flyway database migrations and resolve errors
+---
+
 # Migrate Command
 
 Run Flyway database migrations and resolve any errors.

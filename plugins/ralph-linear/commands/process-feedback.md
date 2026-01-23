@@ -1,3 +1,7 @@
+---
+description: Review and improve Linear Feedback issues
+---
+
 # Process Feedback Command
 
 Review issues in the **Feedback** project that have not yet been reviewed, and improve their titles and descriptions.
