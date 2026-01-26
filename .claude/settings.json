@@ -1,7 +1,12 @@
 {
+  "enabledPlugins": {
+    "ralph-linear@slaguardia-plugins": true,
+    "ralph-local-team@slaguardia-plugins": true,
+    "ralph-linear-team@slaguardia-plugins": true
+  },
   "plugins": {
     "marketplaces": {
-      "self": {
+      "slaguardia-plugins": {
         "url": ".",
         "autoInstall": true
       }

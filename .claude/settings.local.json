@@ -7,7 +7,10 @@
       "Bash(git commit:*)",
       "Bash(git push)",
       "WebFetch(domain:raw.githubusercontent.com)",
-      "WebSearch"
+      "WebSearch",
+      "Bash(claude plugins:*)",
+      "Bash(grep:*)",
+      "Bash(git restore:*)"
     ]
   }
 }
