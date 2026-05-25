@@ -2,55 +2,22 @@
   "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
   "name": "slaguardia-plugins",
   "description": "A curated collection of Claude Code plugins for React Native development, Next.js workflows, Linear automation, compliance auditing, and more.",
-  "version": "1.6.0",
+  "version": "2.0.0",
   "owner": {
     "name": "Steven LaGuardia",
     "email": "slaguardia@users.noreply.github.com"
   },
   "plugins": [
     {
-      "name": "ralph-linear",
-      "description": "Complete Linear workflow automation: planning issues with user stories, async collaboration, and autonomous implementation via the Ralph Wiggum loop.",
-      "source": "./plugins/ralph-linear",
-      "version": "1.2.0",
+      "name": "workflow",
+      "description": "End-to-end feature workflow: interactive planning into user stories, acceptance-criteria generation, and parallel execution via ship. Works with Linear issues or local .tasks/ JSON files.",
+      "source": "./plugins/workflow",
+      "version": "1.0.0",
       "category": "productivity",
       "author": {
         "name": "steve"
       },
-      "tags": ["automation", "linear", "agent-loop", "productivity", "planning", "user-stories"]
-    },
-    {
-      "name": "ralph-local",
-      "description": "Complete local task workflow automation: planning with user stories, interactive/headless collaboration, and autonomous implementation via the Ralph Wiggum loop. All tasks stored in local JSON files.",
-      "source": "./plugins/ralph-local",
-      "version": "1.1.0",
-      "category": "productivity",
-      "author": {
-        "name": "steve"
-      },
-      "tags": ["planning", "automation", "agent-loop", "productivity", "user-stories", "local", "json", "tasks", "markdown"]
-    },
-    {
-      "name": "ralph-local-team",
-      "description": "Two-agent adversarial planning loop: Planning Agent creates user stories, Research Agent validates with web research. Loop until comprehensive, then save tasks to local JSON files.",
-      "source": "./plugins/ralph-local-team",
-      "version": "1.1.0",
-      "category": "productivity",
-      "author": {
-        "name": "steve"
-      },
-      "tags": ["planning", "research", "multi-agent", "adversarial", "user-stories", "local", "json", "tasks"]
-    },
-    {
-      "name": "ralph-linear-team",
-      "description": "Two-agent adversarial planning loop: Planning Agent creates user stories, Research Agent validates with web research. Loop until comprehensive, then create Linear issues.",
-      "source": "./plugins/ralph-linear-team",
-      "version": "1.1.0",
-      "category": "productivity",
-      "author": {
-        "name": "steve"
-      },
-      "tags": ["linear", "planning", "research", "multi-agent", "adversarial", "user-stories", "web-search"]
+      "tags": ["planning", "execution", "acceptance-criteria", "user-stories", "linear", "local-tasks", "productivity"]
     },
     {
       "name": "react-native-design",

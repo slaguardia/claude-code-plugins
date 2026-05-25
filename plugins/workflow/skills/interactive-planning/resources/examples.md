@@ -5,6 +5,7 @@
 **User:** `/interactive-planning add user profile editing`
 
 **Claude asks:**
+
 ```
 I'll help you create task files for user profile editing. Let me ask a few questions:
 
@@ -30,6 +31,7 @@ I'll help you create task files for user profile editing. Let me ask a few quest
 **User:** `1D, 2A, 3B`
 
 **Claude generates draft:**
+
 ```
 ## Feature: Enable user profile editing
 
@@ -89,6 +91,7 @@ before I save the task files.
 **User:** `/interactive-planning fix checkout flow errors`
 
 **Claude asks:**
+
 ```
 I'll help create tasks for fixing checkout errors. A few questions:
 
@@ -108,6 +111,7 @@ I'll help create tasks for fixing checkout errors. A few questions:
 **User:** `1D, 2D`
 
 **Claude generates tasks for:**
+
 - US-001: Improve payment error handling
 - US-002: Fix form validation messages
 - US-003: Handle session expiration gracefully
@@ -120,6 +124,7 @@ I'll help create tasks for fixing checkout errors. A few questions:
 **User:** `/interactive-planning FEAT-20240115_143022-x7k2`
 
 **Claude reads existing task files:**
+
 ```
 Found existing feature: "Add dark mode toggle to settings"
 

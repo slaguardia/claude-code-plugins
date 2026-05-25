@@ -1,0 +1,11 @@
+{
+  "name": "workflow",
+  "version": "1.0.0",
+  "description": "End-to-end feature workflow: interactive planning, acceptance-criteria generation, and parallel execution via ship. Works with Linear or local .tasks/ JSON files.",
+  "author": {
+    "name": "Steven LaGuardia"
+  },
+  "repository": "https://github.com/slaguardia/claude-code-plugins",
+  "keywords": ["planning", "execution", "acceptance-criteria", "user-stories", "linear", "local-tasks"],
+  "skills": "./skills/"
+}
