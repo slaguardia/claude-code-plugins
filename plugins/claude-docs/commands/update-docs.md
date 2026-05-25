@@ -17,7 +17,7 @@ Run after making code changes that could affect documentation, or periodically t
 
 - `/update-docs` — Default mode: check docs against staged + unstaged git changes
 - `/update-docs --full` — Full audit: scan ALL docs for references to code that no longer exists
-- `/update-docs notification system refactored to use batched delivery` — Default mode + hint about what changed
+- `/update-docs <free-text hint about what changed>` — Default mode + hint about what changed (e.g. "notification system refactored to use batched delivery")
 
 ---
 
@@ -72,7 +72,9 @@ Scan ALL documentation files for code references, then verify each reference exi
 **1.3a: Collect all doc files:**
 
 - All `**/CLAUDE.md` files
-- All `docs/**/*.md` files (exclude `docs/policies/node_modules/`)
+- All `docs/**/*.md` files
+
+Exclude any vendored/`node_modules/` paths and any project-specific noise directories (e.g., generated SDKs, build artifacts).
 
 **1.3b: Extract references from each doc file.** Look for:
 
@@ -101,25 +103,21 @@ Build a list of **broken references** (file not found, function not defined, etc
 
 #### Step 2.1: Scan Documentation Files
 
-Read ALL documentation files:
+Discover ALL documentation files in the repo:
 
-| Location                                 | Purpose                                  |
-| ---------------------------------------- | ---------------------------------------- |
-| `CLAUDE.md`                              | Root project docs                        |
-| `src/App/CLAUDE.md`                      | Auth flow, providers, session management |
-| `src/components/CLAUDE.md`               | Component organization, styling          |
-| `src/components/notifications/CLAUDE.md` | Notification UI components               |
-| `src/lib/CLAUDE.md`                      | Domain structure, actions, cache         |
-| `src/lib/notifications/CLAUDE.md`        | Notification actions layer               |
-| `src/lib/onboarding/CLAUDE.md`           | Onboarding actions                       |
-| `src/lib/common/validation/CLAUDE.md`    | Form validation utilities                |
-| `src/screens/CLAUDE.md`                  | Screen patterns, layout, scrolling       |
-| `src/hooks/CLAUDE.md`                    | Hook patterns and conventions            |
-| `flyway/CLAUDE.md`                       | Database migration system                |
-| `flyway/sql/CLAUDE.md`                   | Flyway SQL directory                     |
-| `flyway/sql/repeatables/CLAUDE.md`       | Repeatable migrations                    |
-| `supabase/CLAUDE.md`                     | Supabase backend                         |
-| `docs/**/*.md`                           | All detailed documentation               |
+```bash
+# Every CLAUDE.md in the tree (skip vendored dirs)
+find . -name CLAUDE.md -not -path '*/node_modules/*' -not -path '*/.git/*'
+
+# Every doc under docs/
+find docs -type f \( -name '*.md' -o -name '*.mdx' \) 2>/dev/null
+```
+
+Build a working set of `(path, purpose)` pairs by reading the first heading/intro of each file. Do not assume any specific layout — projects differ. Common patterns to expect:
+
+- A root `CLAUDE.md` with overall project orientation
+- Nested `CLAUDE.md` files in major source directories (e.g. `src/<area>/CLAUDE.md`)
+- A `docs/` tree with topic-organized detail docs and often a `docs/README.md` index
 
 #### Step 2.2: Cross-Reference Changes Against Docs
 
@@ -144,7 +142,7 @@ For each documentation file, classify stale content:
 9. **Pattern descriptions** — High-level pattern explanations valid regardless of reference file
 10. **Architecture overviews** — System design docs describing overall approach
 11. **Historical context** — Sections explaining "why" a decision was made
-12. **Flyway repeatable paths** — `flyway/sql/repeatables/` paths are stable by design
+12. **Stable-by-design paths** — Directories the project treats as conventionally stable (e.g. migration repeatable folders, generated SDK roots). Confirm by checking project conventions before flagging.
 13. **Cross-doc references** — Links between docs (only remove if target doc was deleted)
 
 ---
@@ -196,42 +194,14 @@ From the code changes gathered in Phase 1, identify:
 
 #### Step 4.2: Choose Documentation Location
 
-**CLAUDE.md Files (Quick Reference):**
-
-| Path                       | Purpose                                                       |
-| -------------------------- | ------------------------------------------------------------- |
-| `CLAUDE.md`                | Root project docs, commands, image caching, critical patterns |
-| `src/App/CLAUDE.md`        | Auth flow, providers, session management                      |
-| `src/components/CLAUDE.md` | Component organization, styling, image components             |
-| `src/lib/CLAUDE.md`        | Domain structure, action naming, cache invalidation           |
-| `src/screens/CLAUDE.md`    | Screen patterns, layout shift prevention, scrolling           |
-| `src/hooks/CLAUDE.md`      | Hook patterns, React Query conventions                        |
-| `flyway/CLAUDE.md`         | Database migration system                                     |
-
-**docs/ Folder (Detailed Documentation):**
-
-| Path                    | Purpose                                                     |
-| ----------------------- | ----------------------------------------------------------- |
-| `docs/auth/`            | Authentication and onboarding flows                         |
-| `docs/accounts/`        | Multi-account switching, token storage                      |
-| `docs/data/`            | React Query patterns, normalized cache                      |
-| `docs/notifications/`   | Notification architecture + UI patterns                     |
-| `docs/animations/`      | Reanimated patterns, worklets, performance, common pitfalls |
-| `docs/styling/`         | Uniwind setup + verification                                |
-| `docs/navigation/`      | Navigation structure and patterns                           |
-| `docs/performance/`     | Client perf: lists, images, re-renders, memoization         |
-| `docs/ui/`              | UI patterns: keyboard, forms, modals                        |
-| `docs/database/`        | Flyway workflow + schema view docs                          |
-| `docs/search-and-feed/` | Explore feed ranking, search performance                    |
-| `docs/analytics/`       | View tracking and behavioral collection                     |
-| `docs/releases/`        | OTA updates                                                 |
-| `docs/contributing/`    | QA, shipping, regression checklists                         |
+Use the documentation map discovered in **Step 2.1** to decide where new content belongs. Match the new pattern to the most specific existing doc whose scope covers it. If no existing doc fits, create a new one in the conventional location for the project.
 
 **Placement rules:**
 
-- **CLAUDE.md**: Concise patterns needed during coding (the "what to do")
-- **docs/**: Detailed explanations and architectural context (the "why")
-- Often document in BOTH: quick reference in CLAUDE.md, details in docs/
+- **CLAUDE.md (per directory)**: Concise patterns needed during coding in that area (the "what to do"). Place at the closest ancestor directory that owns the pattern.
+- **docs/ (or equivalent)**: Detailed explanations and architectural context (the "why"). Use the topic folder closest in scope; create a new one only if no existing topic fits.
+- Often document in BOTH: quick reference in the nearest `CLAUDE.md`, details in a topic doc.
+- If the project has neither a `docs/` tree nor nested `CLAUDE.md` files, default to extending the root `CLAUDE.md` and only introduce new files when content grows too large for it.
 
 #### Step 4.3: Write New Documentation
 
@@ -287,9 +257,9 @@ From the code changes gathered in Phase 1, identify:
 - [Link to related docs]
 ```
 
-#### Step 4.4: Update docs/README.md
+#### Step 4.4: Update doc index
 
-If any new docs/ files were created, add entries to `docs/README.md` under the appropriate section.
+If the project has a `docs/README.md` (or equivalent index file) and you created new docs, add entries under the appropriate section so the new files are discoverable.
 
 ---
 
@@ -331,7 +301,7 @@ When scanning for staleness, check each doc for these reference types:
 - [ ] Query key arrays (`['key-name', ...]`)
 - [ ] Line number references (`file.tsx:123-456`)
 - [ ] Cross-references to other docs (`See docs/...`, `See src/.../CLAUDE.md`)
-- [ ] SQL function names (`R__function_name.sql`, `public.function_name()`)
+- [ ] Language/framework-specific identifiers used by the project (e.g. SQL function names like `R__function_name.sql` / `public.function_name()` for Flyway+Postgres, Rails model names, RPC handler names — adapt to the stack)
 
 ---
 
@@ -344,4 +314,4 @@ When scanning for staleness, check each doc for these reference types:
 - **Preserve historical context** (e.g., root cause analyses, version-specific notes) unless the entire feature was removed.
 - **Line number references** are fragile. Prefer function/section names instead.
 - **When in doubt, update rather than delete.** Better to fix a stale reference than remove a useful pattern.
-- **Exclude `docs/policies/node_modules/`** from all scanning.
+- **Exclude vendored and generated paths** from all scanning (e.g. `node_modules/`, build outputs, generated SDK directories).
