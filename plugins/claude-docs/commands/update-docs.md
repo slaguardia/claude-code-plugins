@@ -1,62 +1,347 @@
 ---
-description: Update all project documentation to reflect current codebase state
+description: Detect and clean up stale documentation, then document new patterns from recent code changes
 allowed-tools: Read, Write, Edit, Glob, Grep, Bash
 ---
 
-Update all project documentation to reflect the current state of the codebase.
+## **Goal**
 
-## Instructions
+Detect and clean up stale documentation, then document any new patterns from recent code changes. This is the single command for keeping project documentation accurate and current.
 
-Perform a comprehensive review and update of all documentation files:
+---
 
-### 1. Analyze Current State
+## **Usage**
 
-First, gather information about the current codebase:
+Run after making code changes that could affect documentation, or periodically to audit doc freshness.
 
-- Read `package.json` to get current dependencies and scripts
-- Read configuration files (app.json, tsconfig.json, etc.)
-- Scan source directories for current structure
-- Check for any new directories or significant files
+**Example invocations:**
 
-### 2. Update CLAUDE.md
+- `/update-docs` — Default mode: check docs against staged + unstaged git changes
+- `/update-docs --full` — Full audit: scan ALL docs for references to code that no longer exists
+- `/update-docs notification system refactored to use batched delivery` — Default mode + hint about what changed
 
-Update the root `CLAUDE.md` file with:
-- Current tech stack summary
-- Current project structure
-- Any new patterns or conventions discovered
-- Updated commands section if scripts changed
+---
 
-### 3. Update Technical Documentation
+## **Procedure**
 
-Update technical docs (if they exist) with:
-- Current dependencies (check for added/removed/version changes)
-- Update any "Removed Dependencies" sections
-- Add any new dependencies to appropriate categories
-- Verify peer dependency information is still accurate
+### Phase 1: Gather Context
 
-### 4. Update Architecture Documentation
+#### Step 1.1: Determine Mode
 
-Update architecture docs (if they exist) with:
-- Current directory structure
-- Current route/page map (check for new/removed routes)
-- Any new data types or changes to existing types
-- New patterns or architectural changes
-- Updated component patterns if any
+- If the user passed `--full`, use **Full Audit Mode** (Step 1.3)
+- Otherwise, use **Git Diff Mode** (Step 1.2)
 
-### 5. Update CHANGELOG
+#### Step 1.2: Git Diff Mode (Default)
 
-Add a new entry to changelog (if it exists) under `[Unreleased]` section documenting:
-- Any dependencies added or removed since last update
-- Any files added or removed
-- Any configuration changes
-- Any architectural changes
+Collect the set of changed files and their nature:
 
-If there are no changes since the last documented update, note that the docs were reviewed and confirmed current.
+```bash
+# Staged + unstaged changes (file paths and status)
+git diff --name-status HEAD
 
-### 6. Summary
+# Also check for untracked files that might be new additions
+git status --short
+```
 
-After updating, provide a summary of what changed in the documentation.
+From this output, build three lists:
 
-## Output Format
+- **Deleted files**: Files that were removed (status `D`)
+- **Renamed files**: Files that were moved/renamed (status `R`)
+- **Modified files**: Files that were changed (status `M`)
+- **Added files**: New files (status `A` or `??`)
 
-For each file updated, briefly describe what was changed. If a file required no updates, say so.
+For modified files, also capture what changed:
+
+```bash
+# Get the diff content to understand what was modified
+git diff HEAD -- <file>
+```
+
+Pay attention to:
+
+- Renamed/removed exports (functions, hooks, components, types)
+- Changed function signatures
+- Moved or renamed query keys
+- Changed import paths
+
+**Skip to Phase 2** after collecting changes.
+
+#### Step 1.3: Full Audit Mode (`--full`)
+
+Scan ALL documentation files for code references, then verify each reference exists.
+
+**1.3a: Collect all doc files:**
+
+- All `**/CLAUDE.md` files
+- All `docs/**/*.md` files (exclude `docs/policies/node_modules/`)
+
+**1.3b: Extract references from each doc file.** Look for:
+
+| Reference Type            | Pattern to Extract                                            |
+| ------------------------- | ------------------------------------------------------------- |
+| File paths                | Backtick-wrapped paths ending in `.ts`, `.tsx`, `.sql`, `.js` |
+| File paths in tables      | Pipe-delimited table cells containing file paths              |
+| Component/file references | References like `EventDetailScreen.tsx` without full paths    |
+| Import paths              | `from '@/...'` or `from '...'` patterns inside code blocks    |
+| Hook names                | `use[A-Z][a-zA-Z]+` patterns referenced as callable           |
+| Function names            | Named exports or function calls in "Reference" sections       |
+
+**1.3c: Verify each reference exists:**
+
+1. Check if the file exists at the stated path
+2. For partial paths (e.g., `EventDetailScreen.tsx`), search the codebase for a matching file
+3. For function/hook/component names, search for their definition in the codebase
+
+Build a list of **broken references** (file not found, function not defined, etc.).
+
+**Continue to Phase 2.**
+
+---
+
+### Phase 2: Identify Stale Documentation
+
+#### Step 2.1: Scan Documentation Files
+
+Read ALL documentation files:
+
+| Location                                 | Purpose                                  |
+| ---------------------------------------- | ---------------------------------------- |
+| `CLAUDE.md`                              | Root project docs                        |
+| `src/App/CLAUDE.md`                      | Auth flow, providers, session management |
+| `src/components/CLAUDE.md`               | Component organization, styling          |
+| `src/components/notifications/CLAUDE.md` | Notification UI components               |
+| `src/lib/CLAUDE.md`                      | Domain structure, actions, cache         |
+| `src/lib/notifications/CLAUDE.md`        | Notification actions layer               |
+| `src/lib/onboarding/CLAUDE.md`           | Onboarding actions                       |
+| `src/lib/common/validation/CLAUDE.md`    | Form validation utilities                |
+| `src/screens/CLAUDE.md`                  | Screen patterns, layout, scrolling       |
+| `src/hooks/CLAUDE.md`                    | Hook patterns and conventions            |
+| `flyway/CLAUDE.md`                       | Database migration system                |
+| `flyway/sql/CLAUDE.md`                   | Flyway SQL directory                     |
+| `flyway/sql/repeatables/CLAUDE.md`       | Repeatable migrations                    |
+| `supabase/CLAUDE.md`                     | Supabase backend                         |
+| `docs/**/*.md`                           | All detailed documentation               |
+
+#### Step 2.2: Cross-Reference Changes Against Docs
+
+For each documentation file, classify stale content:
+
+**DEFINITELY STALE (auto-fix):**
+
+1. **Deleted file references** — Doc references a file that no longer exists
+2. **Renamed file references** — Doc uses old name/path for a renamed file
+3. **Removed exports** — Doc references a function, hook, or component that was removed
+4. **Dead import paths** — Code example shows an import that no longer resolves
+
+**PROBABLY STALE (verify before changing):**
+
+5. **Changed function signatures** — Doc shows a signature that no longer matches the implementation
+6. **Outdated code examples** — Code block demonstrates a replaced pattern
+7. **Stale line number references** — Line numbers no longer correspond to referenced code
+8. **Changed query key patterns** — Query keys that have been renamed
+
+**SAFE TO KEEP (do not remove):**
+
+9. **Pattern descriptions** — High-level pattern explanations valid regardless of reference file
+10. **Architecture overviews** — System design docs describing overall approach
+11. **Historical context** — Sections explaining "why" a decision was made
+12. **Flyway repeatable paths** — `flyway/sql/repeatables/` paths are stable by design
+13. **Cross-doc references** — Links between docs (only remove if target doc was deleted)
+
+---
+
+### Phase 3: Clean Up Stale Documentation
+
+#### Step 3.1: Fix DEFINITELY STALE Items
+
+- **Deleted file references**: Remove the reference line, or replace with the correct file if functionality moved. If the entire section is about a deleted feature, remove the section.
+- **Renamed file references**: Update the path to the new location.
+- **Removed exports**: Remove the reference. If replaced, update to the replacement.
+- **Dead import paths**: Update the import path in the code example.
+
+#### Step 3.2: Verify and Fix PROBABLY STALE Items
+
+For each probably stale item, read the CURRENT source code to determine the correct state:
+
+- **Changed signatures**: Read the current function/hook and update the documented signature.
+- **Outdated code examples**: Read the current implementation and update to match.
+- **Stale line numbers**: Update to correct line numbers or remove them entirely (they drift frequently; prefer function/section names instead).
+- **Changed query keys**: Update to the current key pattern.
+
+#### Step 3.3: Clean Up Empty Sections
+
+After removing stale references, check if any section has become empty (heading with no content). Remove empty sections cleanly.
+
+#### Step 3.4: Safety Check
+
+Before finalizing any removal, verify:
+
+1. The pattern or concept described is truly obsolete (not just the reference file)
+2. No other part of the codebase still uses the documented pattern
+3. Removing the content would not leave a gap in documentation coverage
+
+**When in doubt, update the reference rather than remove the section.**
+
+---
+
+### Phase 4: Document New Patterns
+
+#### Step 4.1: Identify Documentation Gaps
+
+From the code changes gathered in Phase 1, identify:
+
+- **New files/features** that have no documentation anywhere
+- **New patterns** introduced by the changes (new hooks, components, SQL functions)
+- **Changed behavior** that existing docs should mention but don't
+- **New gotchas or edge cases** discovered during the changes
+
+#### Step 4.2: Choose Documentation Location
+
+**CLAUDE.md Files (Quick Reference):**
+
+| Path                       | Purpose                                                       |
+| -------------------------- | ------------------------------------------------------------- |
+| `CLAUDE.md`                | Root project docs, commands, image caching, critical patterns |
+| `src/App/CLAUDE.md`        | Auth flow, providers, session management                      |
+| `src/components/CLAUDE.md` | Component organization, styling, image components             |
+| `src/lib/CLAUDE.md`        | Domain structure, action naming, cache invalidation           |
+| `src/screens/CLAUDE.md`    | Screen patterns, layout shift prevention, scrolling           |
+| `src/hooks/CLAUDE.md`      | Hook patterns, React Query conventions                        |
+| `flyway/CLAUDE.md`         | Database migration system                                     |
+
+**docs/ Folder (Detailed Documentation):**
+
+| Path                    | Purpose                                                     |
+| ----------------------- | ----------------------------------------------------------- |
+| `docs/auth/`            | Authentication and onboarding flows                         |
+| `docs/accounts/`        | Multi-account switching, token storage                      |
+| `docs/data/`            | React Query patterns, normalized cache                      |
+| `docs/notifications/`   | Notification architecture + UI patterns                     |
+| `docs/animations/`      | Reanimated patterns, worklets, performance, common pitfalls |
+| `docs/styling/`         | Uniwind setup + verification                                |
+| `docs/navigation/`      | Navigation structure and patterns                           |
+| `docs/performance/`     | Client perf: lists, images, re-renders, memoization         |
+| `docs/ui/`              | UI patterns: keyboard, forms, modals                        |
+| `docs/database/`        | Flyway workflow + schema view docs                          |
+| `docs/search-and-feed/` | Explore feed ranking, search performance                    |
+| `docs/analytics/`       | View tracking and behavioral collection                     |
+| `docs/releases/`        | OTA updates                                                 |
+| `docs/contributing/`    | QA, shipping, regression checklists                         |
+
+**Placement rules:**
+
+- **CLAUDE.md**: Concise patterns needed during coding (the "what to do")
+- **docs/**: Detailed explanations and architectural context (the "why")
+- Often document in BOTH: quick reference in CLAUDE.md, details in docs/
+
+#### Step 4.3: Write New Documentation
+
+**For CLAUDE.md sections:**
+
+````markdown
+## [Pattern Name]
+
+### Problem
+
+[Brief description of when this issue occurs]
+
+### Solution
+
+[Explanation of the fix/pattern]
+
+```typescript
+// Code example
+```
+
+### Reference
+
+- `path/to/file.tsx` - [brief description]
+````
+
+**For docs/ files:**
+
+```markdown
+# [Topic Title]
+
+## Overview
+
+[What this document covers and why it matters]
+
+## Problem
+
+[Detailed explanation of the issue]
+
+## Solution
+
+[In-depth explanation with rationale]
+
+## Implementation
+
+[Details with code examples]
+
+## Examples
+
+- `path/to/file.tsx` - [description]
+
+## Related
+
+- [Link to related docs]
+```
+
+#### Step 4.4: Update docs/README.md
+
+If any new docs/ files were created, add entries to `docs/README.md` under the appropriate section.
+
+---
+
+### Phase 5: Summary Report
+
+After all changes are complete, output a summary:
+
+```
+## Documentation Update Summary
+
+### Stale Content Cleaned Up
+| File | Section | Action |
+|---|---|---|
+| src/screens/CLAUDE.md | Reference Implementations | Updated path: `OldFile.tsx` → `NewFile.tsx` |
+| docs/performance/... | Code Example | Updated function signature to match current impl |
+
+### New Documentation Added
+| File | Section | Description |
+|---|---|---|
+| src/hooks/CLAUDE.md | Batch Delivery Pattern | Documented new batched notification hook |
+
+### No Changes Needed
+[List any docs that were checked but found to be current]
+```
+
+---
+
+## **Reference Type Checklist**
+
+When scanning for staleness, check each doc for these reference types:
+
+- [ ] File paths in backticks (`` `src/path/to/file.ts` ``)
+- [ ] File names in table cells (pipe-delimited)
+- [ ] File names in "Reference" or "Reference Implementations" sections
+- [ ] Import statements in code blocks (`from '@/...'`)
+- [ ] Hook names (`use[Name]`)
+- [ ] Function names in "Key Actions" or "Available Functions" sections
+- [ ] Component names in "Components" tables
+- [ ] Query key arrays (`['key-name', ...]`)
+- [ ] Line number references (`file.tsx:123-456`)
+- [ ] Cross-references to other docs (`See docs/...`, `See src/.../CLAUDE.md`)
+- [ ] SQL function names (`R__function_name.sql`, `public.function_name()`)
+
+---
+
+## **Notes**
+
+- **Do not duplicate information** already documented elsewhere. Check before adding.
+- **Update existing sections** when content needs refinement rather than adding duplicates.
+- **Keep CLAUDE.md practical and concise** — focus on "what to do" not "what happened."
+- **Use docs/ for "why" explanations** and architectural context.
+- **Preserve historical context** (e.g., root cause analyses, version-specific notes) unless the entire feature was removed.
+- **Line number references** are fragile. Prefer function/section names instead.
+- **When in doubt, update rather than delete.** Better to fix a stale reference than remove a useful pattern.
+- **Exclude `docs/policies/node_modules/`** from all scanning.
