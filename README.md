@@ -1,34 +1,79 @@
 # Claude Code Plugins
 
-A curated collection of Claude Code plugins for React Native development, Next.js workflows, Linear automation, compliance auditing, and more.
+Skills, agents, and commands for React Native, Next.js, feature workflows, and
+app compliance auditing. Take the whole plugin, or take a single skill.
 
-## Quick Start
+## Install
 
-### Add the Marketplace
+Pick one of the three routes. Do not mix routes one and three: you would end up
+with each skill twice.
+
+### 1. A whole plugin (Claude Code)
 
 ```
 /plugin marketplace add slaguardia/claude-code-plugins
+/plugin install workflow@slaguardia
 ```
 
-Or with full URL:
+On Claude Code v2.1.275 or later, one command does both:
 
 ```
-/plugin marketplace add https://github.com/slaguardia/claude-code-plugins
+/plugin install workflow --marketplace slaguardia/claude-code-plugins
 ```
 
-### Install a Plugin
+Third-party marketplaces do not auto-update by default. To get updates, open
+`/plugin`, go to **Marketplaces**, select `slaguardia`, and choose **Enable
+auto-update**. Otherwise run `/plugin marketplace update slaguardia` yourself.
 
-```
-/plugin install react-native-design@slaguardia/claude-code-plugins
+### 2. A single skill (any agent)
+
+Use this to take one skill without the rest. It works with Claude Code, Codex,
+Cursor, Copilot, Zed, and others.
+
+```bash
+npx skills add slaguardia/claude-code-plugins --skill execute
 ```
 
-Or browse available plugins:
+List what is available first:
 
+```bash
+npx skills add slaguardia/claude-code-plugins --list
 ```
-/plugin > Discover
+
+These are file copies you own and edit, not a managed bundle.
+
+### 3. Clone and symlink (to edit the skills yourself)
+
+A plugin install is read-only, so edits to it are lost on the next update.
+Symlink instead, and the working tree stays the source of truth.
+
+```bash
+git clone https://github.com/slaguardia/claude-code-plugins
+cd claude-code-plugins
+./scripts/link-skills.sh
 ```
+
+Run `./scripts/link-skills.sh --dry-run` first to see what it would change, and
+`--unlink` to undo. The script refuses to overwrite a real directory that is
+already in `~/.claude/skills`.
+
+## Skills
+
+Every skill is self-contained, so route 2 works for any row here.
+
+| Skill | Plugin | What it does |
+|-------|--------|--------------|
+| `interactive-planning` | workflow | Turn an idea into task files with user stories |
+| `acceptance-criteria` | workflow | Generate testable acceptance criteria |
+| `execute` | workflow | Implement a feature, one sub-task at a time |
+| `ship` | workflow | Run stories in parallel subagents |
+| `goal-prompt` | workflow | Emit a short hand-off prompt for another agent |
+| `react-native-expert` | react-native-design | Cross-platform mobile specialist |
+| `ui-design` | react-native-design | Design principles, spacing, accessibility |
+| `useeffect-patterns` | react-native-design | When NOT to use Effect |
 
 ## Available Plugins
+
 
 | Plugin | Description | Components |
 |--------|-------------|------------|
@@ -142,30 +187,25 @@ claude-code-plugins/
 │       ├── README.md
 │       └── commands/
 ├── scripts/
-│   └── validate-plugins.sh     # CI validation
+│   ├── validate-plugins.sh     # CI validation
+│   └── link-skills.sh          # symlink skills into ~/.claude/skills
 └── README.md
 ```
 
 ## Installation Commands
 
-Copy-paste commands to install each plugin:
+One line per plugin, after adding the marketplace once (see [Install](#install)).
 
 ```bash
-# Planning, execution, and docs
-/plugin install workflow@slaguardia/claude-code-plugins
-
-# React Native/Expo toolkit
-/plugin install react-native-design@slaguardia/claude-code-plugins
-
-# Compliance auditing
-/plugin install compliance-auditor@slaguardia/claude-code-plugins
-
-# Next.js development
-/plugin install nextjs-development@slaguardia/claude-code-plugins
-
-# Database migrations
-/plugin install database-migration@slaguardia/claude-code-plugins
+/plugin install workflow@slaguardia              # planning, execution, docs
+/plugin install react-native-design@slaguardia   # React Native/Expo toolkit
+/plugin install compliance-auditor@slaguardia    # compliance auditing
+/plugin install nextjs-development@slaguardia    # Next.js development
+/plugin install database-migration@slaguardia    # Flyway migrations
 ```
+
+The name after `@` is the marketplace name from `.claude-plugin/marketplace.json`,
+not the GitHub repo path.
 
 ## Plugin Structure
 

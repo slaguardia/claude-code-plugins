@@ -6,6 +6,24 @@
     "name": "Steven LaGuardia"
   },
   "repository": "https://github.com/slaguardia/claude-code-plugins",
-  "keywords": ["compliance", "privacy", "legal", "app-store", "gdpr", "ccpa", "dmca", "audit"],
-  "commands": "./commands/"
+  "keywords": [
+    "compliance",
+    "privacy",
+    "legal",
+    "app-store",
+    "gdpr",
+    "ccpa",
+    "dmca",
+    "audit"
+  ],
+  "commands": [
+    "./commands/apple-compliance.md",
+    "./commands/dmca-audit.md",
+    "./commands/guidelines-audit.md",
+    "./commands/modal-audit.md",
+    "./commands/policy-cohesion.md",
+    "./commands/privacy-audit.md",
+    "./commands/terms-audit.md",
+    "./commands/welcome-screen-audit.md"
+  ]
 }

@@ -6,7 +6,26 @@
     "name": "Steven LaGuardia"
   },
   "repository": "https://github.com/slaguardia/claude-code-plugins",
-  "keywords": ["planning", "execution", "acceptance-criteria", "user-stories", "linear", "local-tasks", "documentation", "claude-md"],
-  "skills": "./skills/",
-  "commands": "./commands/"
+  "keywords": [
+    "planning",
+    "execution",
+    "acceptance-criteria",
+    "user-stories",
+    "linear",
+    "local-tasks",
+    "documentation",
+    "claude-md"
+  ],
+  "skills": [
+    "./skills/acceptance-criteria",
+    "./skills/execute",
+    "./skills/goal-prompt",
+    "./skills/interactive-planning",
+    "./skills/ship"
+  ],
+  "commands": [
+    "./commands/capture-learnings.md",
+    "./commands/claude-flow-audit.md",
+    "./commands/update-docs.md"
+  ]
 }

@@ -179,6 +179,28 @@ validate_plugin_json() {
         error "$plugin_name: 'components' should not be nested - use top-level 'skills', 'commands', 'agents'"
     fi
 
+    # Component fields must be arrays of paths.
+    # `claude plugin validate` rejects the bare directory-string form
+    # ("agents": "./agents/") even though this script used to accept it,
+    # so an install would fail while CI stayed green.
+    local field field_type entry
+    for field in skills commands agents; do
+        if jq -e --arg f "$field" 'has($f)' "$plugin_file" &>/dev/null; then
+            field_type=$(jq -r --arg f "$field" '.[$f] | type' "$plugin_file")
+            if [ "$field_type" != "array" ]; then
+                error "$plugin_name: '$field' must be an array of paths, got $field_type. Directory strings fail 'claude plugin validate'."
+                continue
+            fi
+            # Every listed path must exist on disk.
+            while IFS= read -r entry; do
+                [ -z "$entry" ] && continue
+                if [ ! -e "$plugin_dir/$entry" ]; then
+                    error "$plugin_name: '$field' lists $entry, which does not exist"
+                fi
+            done < <(jq -r --arg f "$field" '.[$f][]' "$plugin_file")
+        fi
+    done
+
     success "$plugin_name: plugin.json valid"
 }
 

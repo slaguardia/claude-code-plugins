@@ -6,6 +6,14 @@
     "name": "Steven LaGuardia"
   },
   "repository": "https://github.com/slaguardia/claude-code-plugins",
-  "keywords": ["database", "flyway", "migrations", "sql", "postgresql"],
-  "commands": "./commands/"
+  "keywords": [
+    "database",
+    "flyway",
+    "migrations",
+    "sql",
+    "postgresql"
+  ],
+  "commands": [
+    "./commands/migrate.md"
+  ]
 }

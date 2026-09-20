@@ -6,8 +6,35 @@
     "name": "Steven LaGuardia"
   },
   "repository": "https://github.com/slaguardia/claude-code-plugins",
-  "keywords": ["react-native", "expo", "ui-design", "forms", "modals", "react-query", "hooks", "linting", "accessibility", "architecture", "product"],
-  "agents": "./agents/",
-  "skills": "./skills/",
-  "commands": "./commands/"
+  "keywords": [
+    "react-native",
+    "expo",
+    "ui-design",
+    "forms",
+    "modals",
+    "react-query",
+    "hooks",
+    "linting",
+    "accessibility",
+    "architecture",
+    "product"
+  ],
+  "agents": [
+    "./agents/cache-agent.md",
+    "./agents/design-agent.md",
+    "./agents/form-handler.md",
+    "./agents/merge-agent.md",
+    "./agents/modal-agent.md"
+  ],
+  "skills": [
+    "./skills/react-native-expert",
+    "./skills/ui-design",
+    "./skills/useeffect-patterns"
+  ],
+  "commands": [
+    "./commands/accessibility-audit.md",
+    "./commands/architecture-audit.md",
+    "./commands/cook.md",
+    "./commands/lint.md"
+  ]
 }

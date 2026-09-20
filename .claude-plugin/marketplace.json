@@ -1,6 +1,6 @@
 {
   "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
-  "name": "slaguardia-plugins",
+  "name": "slaguardia",
   "description": "A curated collection of Claude Code plugins for React Native development, Next.js workflows, Linear automation, compliance auditing, and more.",
   "version": "2.0.0",
   "owner": {
@@ -17,7 +17,19 @@
       "author": {
         "name": "steve"
       },
-      "tags": ["planning", "execution", "execute", "goal-prompt", "acceptance-criteria", "user-stories", "linear", "local-tasks", "documentation", "claude-md", "productivity"]
+      "tags": [
+        "planning",
+        "execution",
+        "execute",
+        "goal-prompt",
+        "acceptance-criteria",
+        "user-stories",
+        "linear",
+        "local-tasks",
+        "documentation",
+        "claude-md",
+        "productivity"
+      ]
     },
     {
       "name": "react-native-design",
@@ -28,7 +40,19 @@
       "author": {
         "name": "steve"
       },
-      "tags": ["react-native", "expo", "ui-design", "forms", "modals", "react-query", "hooks", "linting", "accessibility", "architecture", "product"]
+      "tags": [
+        "react-native",
+        "expo",
+        "ui-design",
+        "forms",
+        "modals",
+        "react-query",
+        "hooks",
+        "linting",
+        "accessibility",
+        "architecture",
+        "product"
+      ]
     },
     {
       "name": "compliance-auditor",
@@ -39,7 +63,16 @@
       "author": {
         "name": "steve"
       },
-      "tags": ["compliance", "privacy", "legal", "app-store", "gdpr", "ccpa", "dmca", "audit"]
+      "tags": [
+        "compliance",
+        "privacy",
+        "legal",
+        "app-store",
+        "gdpr",
+        "ccpa",
+        "dmca",
+        "audit"
+      ]
     },
     {
       "name": "database-migration",
@@ -50,7 +83,13 @@
       "author": {
         "name": "steve"
       },
-      "tags": ["database", "flyway", "migrations", "sql", "postgresql"]
+      "tags": [
+        "database",
+        "flyway",
+        "migrations",
+        "sql",
+        "postgresql"
+      ]
     },
     {
       "name": "nextjs-development",
@@ -61,7 +100,16 @@
       "author": {
         "name": "steve"
       },
-      "tags": ["nextjs", "app-router", "pnpm", "typescript", "eslint", "prettier", "documentation", "linting"]
+      "tags": [
+        "nextjs",
+        "app-router",
+        "pnpm",
+        "typescript",
+        "eslint",
+        "prettier",
+        "documentation",
+        "linting"
+      ]
     }
   ]
 }
