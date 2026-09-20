@@ -32,16 +32,31 @@ Or browse available plugins:
 
 | Plugin | Description | Components |
 |--------|-------------|------------|
-| **react-native-design** | Complete React Native/Expo toolkit | 5 agents, 2 skills, 4 commands |
-| **ralph-linear** | Linear workflow automation with Ralph Wiggum loop | 3 skills, 2 commands |
+| **workflow** | Planning, execution, and documentation hygiene | 5 skills, 3 commands |
+| **react-native-design** | Complete React Native/Expo toolkit | 5 agents, 3 skills, 4 commands |
 | **compliance-auditor** | App compliance auditing suite | 8 commands |
-| **claude-docs** | Documentation management | 2 commands |
 | **nextjs-development** | Next.js development tools | 2 commands |
 | **database-migration** | Flyway migration tools | 1 command |
 
 ## Plugin Details
 
-### react-native-design `v1.3.0`
+### workflow `v1.2.0`
+
+End-to-end feature workflow: planning into user stories, acceptance criteria, autonomous execution, and documentation hygiene. Works with Linear issues or local `.tasks/` JSON files.
+
+**Skills:**
+- `interactive-planning` - Create task files with user stories through Q&A
+- `acceptance-criteria` - Generate testable acceptance criteria
+- `execute` - Autonomously implement a feature, one sub-task at a time
+- `goal-prompt` - Emit a short hand-off prompt for another agent
+- `ship` - Parallel execution across sub-tasks
+
+**Commands:**
+- `/update-docs` - Sync docs with codebase structure
+- `/capture-learnings` - Save session insights to docs
+- `/claude-flow-audit` - Audit CLAUDE.md and agent config health
+
+### react-native-design `v1.4.0`
 
 Complete React Native/Expo development toolkit with UI design standards, specialized agents, and code quality tools.
 
@@ -53,6 +68,7 @@ Complete React Native/Expo development toolkit with UI design standards, special
 - `merge-agent` - Pre-merge quality checks
 
 **Skills:**
+- `react-native-expert` - Cross-platform mobile specialist
 - `ui-design` - Design principles, spacing, accessibility
 - `useeffect-patterns` - When NOT to use Effect
 
@@ -61,21 +77,6 @@ Complete React Native/Expo development toolkit with UI design standards, special
 - `/architecture-audit` - Project structure analysis
 - `/accessibility-audit` - iOS Dynamic Type compliance
 - `/cook` - Product refinement by taste
-
-### ralph-linear `v1.1.0`
-
-Complete Linear workflow automation: planning issues with user stories, async collaboration, and autonomous implementation.
-
-**Skills:**
-- `/ralph` - Execute one Ralph Wiggum loop iteration
-- `/interactive-planning` - Create Linear issues through Q&A
-- `/headless-planning` - Async planning via Linear descriptions
-
-**Commands:**
-- `/process-feedback` - Improve Linear Feedback issues
-- `/update-changelog` - Generate changelog from commits
-
-**Requires:** `linear-server` MCP
 
 ### compliance-auditor `v1.0.0`
 
@@ -90,14 +91,6 @@ Comprehensive compliance auditing for app policies, privacy, and App Store requi
 - `/policy-cohesion` - Cross-document consistency
 - `/welcome-screen-audit` - Auth screen UX
 - `/modal-audit` - Modal component consistency
-
-### claude-docs `v1.2.0`
-
-Tools for managing CLAUDE.md documentation.
-
-**Commands:**
-- `/capture-learnings` - Save session insights to docs
-- `/update-docs` - Sync docs with codebase structure
 
 ### nextjs-development `v1.0.0`
 
@@ -121,25 +114,19 @@ claude-code-plugins/
 ├── .claude-plugin/
 │   └── marketplace.json        # Marketplace metadata
 ├── plugins/
-│   ├── react-native-design/
+│   ├── workflow/
 │   │   ├── .claude-plugin/
 │   │   │   └── plugin.json     # Plugin metadata
+│   │   ├── skills/
+│   │   └── commands/
+│   ├── react-native-design/
+│   │   ├── .claude-plugin/
+│   │   │   └── plugin.json
 │   │   ├── README.md
 │   │   ├── agents/
 │   │   ├── skills/
 │   │   └── commands/
-│   ├── ralph-linear/
-│   │   ├── .claude-plugin/
-│   │   │   └── plugin.json
-│   │   ├── README.md
-│   │   ├── skills/
-│   │   └── commands/
 │   ├── compliance-auditor/
-│   │   ├── .claude-plugin/
-│   │   │   └── plugin.json
-│   │   ├── README.md
-│   │   └── commands/
-│   ├── claude-docs/
 │   │   ├── .claude-plugin/
 │   │   │   └── plugin.json
 │   │   ├── README.md
@@ -154,6 +141,8 @@ claude-code-plugins/
 │       │   └── plugin.json
 │       ├── README.md
 │       └── commands/
+├── scripts/
+│   └── validate-plugins.sh     # CI validation
 └── README.md
 ```
 
@@ -162,17 +151,14 @@ claude-code-plugins/
 Copy-paste commands to install each plugin:
 
 ```bash
+# Planning, execution, and docs
+/plugin install workflow@slaguardia/claude-code-plugins
+
 # React Native/Expo toolkit
 /plugin install react-native-design@slaguardia/claude-code-plugins
 
-# Linear automation
-/plugin install ralph-linear@slaguardia/claude-code-plugins
-
 # Compliance auditing
 /plugin install compliance-auditor@slaguardia/claude-code-plugins
-
-# Documentation management
-/plugin install claude-docs@slaguardia/claude-code-plugins
 
 # Next.js development
 /plugin install nextjs-development@slaguardia/claude-code-plugins
