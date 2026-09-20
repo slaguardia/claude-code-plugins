@@ -141,8 +141,8 @@ claude-code-plugins/
 │   └── database/<name>/SKILL.md
 ├── agents/<name>.md
 └── scripts/
-    ├── link-skills.sh          # symlink skills into ~/.claude/skills
-    └── validate-frontmatter.sh # what the official validator does not check
+    ├── link-skills.sh     # symlink skills into ~/.claude/skills
+    └── check-skills.rb    # what the official validator does not check
 ```
 
 A skill is listed in `plugin.json` to ship. A skill on disk but absent from
@@ -154,12 +154,19 @@ Two checks, and they do different jobs.
 
 ```bash
 claude plugin validate .            # manifest schema; what /plugin install runs
-./scripts/validate-frontmatter.sh   # skill and agent frontmatter, name collisions
+ruby scripts/check-skills.rb        # frontmatter YAML, name collisions, unshipped skills
 ```
 
-The official validator does not read `SKILL.md` frontmatter. A skill with no
-frontmatter passes it and is silently dead at runtime. That gap is why the
-second script exists. CI runs both.
+The official validator does not read `SKILL.md`. A skill with broken or missing
+frontmatter passes it and is silently dead at runtime.
+
+Claude Code's own frontmatter parser is lenient, which hides a sharper bug. A
+description like `Does a thing. Keywords: a, b` loads fine in Claude Code but is
+invalid YAML, because the second colon opens a nested mapping. `npx skills`
+skips such a skill without failing, so it cannot be installed on its own and
+nothing warns you. `check-skills.rb` parses with a real YAML parser to catch it.
+
+CI runs both checks.
 
 ## Contributing
 

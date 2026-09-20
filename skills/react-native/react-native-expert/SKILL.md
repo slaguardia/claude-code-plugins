@@ -1,6 +1,6 @@
 ---
 name: react-native-expert
-description: Mobile specialist for cross-platform apps with React Native and Expo. Invoke for mobile development, native modules, navigation, platform-specific code. Keywords: React Native, Expo, mobile, iOS, Android, navigation.
+description: 'Mobile specialist for cross-platform apps with React Native and Expo. Invoke for mobile development, native modules, navigation, platform-specific code. Keywords: React Native, Expo, mobile, iOS, Android, navigation.'
 ---
 
 # React Native Expert
