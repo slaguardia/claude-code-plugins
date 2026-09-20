@@ -13,8 +13,21 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      # The official validator owns manifest schema: it is the same check that
+      # `/plugin install` runs, so a green build here means the marketplace
+      # actually installs. It needs no auth and no API key.
+      # It does NOT look at skill or command frontmatter.
+      - name: Install Claude Code CLI
+        run: npm install -g @anthropic-ai/claude-code@latest
+
+      - name: Validate marketplace schema (official)
+        run: claude plugin validate .
+
+      # Our script owns what the official validator ignores: YAML frontmatter
+      # in every command, skill, and agent file. A SKILL.md with no frontmatter
+      # passes `claude plugin validate` and is silently dead at runtime.
       - name: Install jq
         run: sudo apt-get install -y jq
 
-      - name: Run plugin validation
+      - name: Validate frontmatter and cross-references
         run: bash scripts/validate-plugins.sh
