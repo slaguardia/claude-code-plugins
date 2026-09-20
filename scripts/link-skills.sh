@@ -2,10 +2,15 @@
 #
 # link-skills.sh - Symlink this repo's skills into ~/.claude/skills/
 #
-# Use this instead of installing the marketplace locally. A plugin install is a
-# read-only managed copy, so edits made there are lost on the next update.
-# Symlinks point at the working tree, so editing a skill here takes effect
-# immediately and shows up in `git status`.
+# MAINTAINER SCRIPT. This is not an installer, and it is not an install route
+# for anyone else. To USE these skills, install the plugin or run
+# `npx skills add slaguardia/claude-code-plugins --skill <name>`.
+#
+# Its one job is edit-in-place while developing the skills here, which neither
+# install route gives you: a plugin install is a read-only managed copy, and
+# `npx skills` copies files from a local path rather than linking them. A
+# symlink points at the working tree, so an edit is live in the next session
+# and shows up in `git status`.
 #
 # Usage:
 #   ./scripts/link-skills.sh           # create or refresh the symlinks

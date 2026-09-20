@@ -9,7 +9,7 @@ entry installable on its own.
 
 ## Install
 
-Pick one route. Do not mix routes 1 and 3: you would get every skill twice.
+Two routes. Take the whole set, or take one skill.
 
 ### 1. The whole set (Claude Code)
 
@@ -44,19 +44,9 @@ npx skills add slaguardia/claude-code-plugins --list
 
 These are file copies you own and edit, not a managed bundle.
 
-### 3. Clone and symlink (to edit the skills yourself)
-
-A plugin install is read-only, so edits to it are lost on the next update.
-Symlink instead, and the working tree stays the source of truth.
-
-```bash
-git clone https://github.com/slaguardia/claude-code-plugins
-cd claude-code-plugins
-./scripts/link-skills.sh
-```
-
-Use `--dry-run` to preview and `--unlink` to undo. The script refuses to
-overwrite a real directory that is already in `~/.claude/skills`.
+Route 2 writes real files into your project, so edit them freely. To edit a
+skill and keep pulling updates, clone the repo instead and see
+[Working on these skills](#working-on-these-skills).
 
 ## Invocation
 
@@ -147,6 +137,29 @@ claude-code-plugins/
 
 A skill is listed in `plugin.json` to ship. A skill on disk but absent from
 that list does not ship, which is how work in progress stays out of the way.
+
+## Working on these skills
+
+This section is for editing the skills in this repo. It is not an install
+route. If you only want to use them, use one of the two routes above.
+
+`scripts/link-skills.sh` symlinks every skill into `~/.claude/skills`, so the
+working tree is the one source of truth and an edit is live in your next
+session. Neither install route does this: a plugin install is a read-only
+managed copy, and `npx skills` copies files from a local path rather than
+linking them.
+
+```bash
+git clone https://github.com/slaguardia/claude-code-plugins
+cd claude-code-plugins
+./scripts/link-skills.sh --dry-run   # preview
+./scripts/link-skills.sh             # link
+./scripts/link-skills.sh --unlink    # undo
+```
+
+It refuses to overwrite a real directory already in `~/.claude/skills`, and
+reports it as a conflict instead. A conflict means that skill exists twice and
+the two copies will drift.
 
 ## Validation
 
