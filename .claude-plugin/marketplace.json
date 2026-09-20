@@ -1,113 +1,31 @@
 {
   "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
   "name": "slaguardia",
-  "description": "A curated collection of Claude Code plugins for React Native development, Next.js workflows, Linear automation, compliance auditing, and more.",
-  "version": "2.0.0",
+  "description": "Steven LaGuardia's agent skills: React Native, feature workflows, compliance auditing, and Next.js.",
   "owner": {
     "name": "Steven LaGuardia",
     "email": "slaguardia@users.noreply.github.com"
   },
   "plugins": [
     {
-      "name": "workflow",
-      "description": "End-to-end feature workflow: interactive planning into user stories, acceptance-criteria generation, autonomous execution (execute), agent hand-off prompts (goal-prompt), parallel execution via ship, plus documentation hygiene commands (update-docs, claude-flow-audit, capture-learnings). Works with Linear issues or local .tasks/ JSON files.",
-      "source": "./plugins/workflow",
-      "version": "1.2.0",
-      "category": "productivity",
-      "author": {
-        "name": "steve"
-      },
-      "tags": [
-        "planning",
-        "execution",
-        "execute",
-        "goal-prompt",
-        "acceptance-criteria",
-        "user-stories",
-        "linear",
-        "local-tasks",
-        "documentation",
-        "claude-md",
-        "productivity"
-      ]
-    },
-    {
-      "name": "react-native-design",
-      "description": "Complete React Native/Expo toolkit: UI design, a React Native expert skill, agents, code quality, linting, architecture audits, accessibility, and product refinement.",
-      "source": "./plugins/react-native-design",
-      "version": "1.4.0",
+      "name": "slaguardia-skills",
+      "source": "./",
+      "description": "Skills for React Native and Expo, feature workflows, app compliance auditing, and Next.js. Every entry is a skill, so any one of them can be installed on its own.",
+      "version": "2.0.0",
       "category": "development",
       "author": {
-        "name": "steve"
+        "name": "Steven LaGuardia"
       },
-      "tags": [
+      "keywords": [
         "react-native",
         "expo",
-        "ui-design",
-        "forms",
-        "modals",
-        "react-query",
-        "hooks",
-        "linting",
-        "accessibility",
-        "architecture",
-        "product"
-      ]
-    },
-    {
-      "name": "compliance-auditor",
-      "description": "Comprehensive compliance auditing tools for app policies, privacy, terms of service, DMCA, community guidelines, and App Store compliance.",
-      "source": "./plugins/compliance-auditor",
-      "version": "1.0.0",
-      "category": "security",
-      "author": {
-        "name": "steve"
-      },
-      "tags": [
+        "workflow",
+        "planning",
+        "execution",
         "compliance",
         "privacy",
-        "legal",
         "app-store",
-        "gdpr",
-        "ccpa",
-        "dmca",
-        "audit"
-      ]
-    },
-    {
-      "name": "database-migration",
-      "description": "Database migration tools for Flyway, including running migrations, fixing common errors, and managing SQL files.",
-      "source": "./plugins/database-migration",
-      "version": "1.0.0",
-      "category": "database",
-      "author": {
-        "name": "steve"
-      },
-      "tags": [
-        "database",
-        "flyway",
-        "migrations",
-        "sql",
-        "postgresql"
-      ]
-    },
-    {
-      "name": "nextjs-development",
-      "description": "Next.js development tools including comprehensive linting, documentation management, and best practices for App Router projects with pnpm.",
-      "source": "./plugins/nextjs-development",
-      "version": "1.0.0",
-      "category": "development",
-      "author": {
-        "name": "steve"
-      },
-      "tags": [
         "nextjs",
-        "app-router",
-        "pnpm",
-        "typescript",
-        "eslint",
-        "prettier",
-        "documentation",
         "linting"
       ]
     }

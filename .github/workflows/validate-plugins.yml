@@ -29,5 +29,5 @@ jobs:
       - name: Install jq
         run: sudo apt-get install -y jq
 
-      - name: Validate frontmatter and cross-references
-        run: bash scripts/validate-plugins.sh
+      - name: Validate skill and agent frontmatter
+        run: bash scripts/validate-frontmatter.sh

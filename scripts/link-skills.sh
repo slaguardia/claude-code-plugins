@@ -77,14 +77,16 @@ while IFS= read -r skill_md; do
     run ln -s "$skill_dir" "$link"
     echo -e "${GREEN}linked${NC} $name -> ${skill_dir#$ROOT_DIR/}"
     LINKED=$((LINKED + 1))
-done < <(find "$ROOT_DIR/plugins" -name SKILL.md -not -path '*/node_modules/*' | sort)
+done < <(find "$ROOT_DIR/skills" -name SKILL.md \
+    -not -path '*/node_modules/*' \
+    -not -path '*/in-progress/*' | sort)
 
 echo
 if [ "$UNLINK" = true ]; then
     echo "removed $REMOVED symlink(s) from $TARGET_DIR"
 else
     echo "linked $LINKED, unchanged $UNCHANGED, conflicts $CONFLICTS, into $TARGET_DIR"
-    echo "Edit a skill under plugins/ and the change is live in your next session."
+    echo "Edit a skill under skills/ and the change is live in your next session."
     if [ "$CONFLICTS" -gt 0 ]; then
         echo
         echo "A conflict means the same skill exists twice: once here, once in"

@@ -1,0 +1,57 @@
+{
+  "name": "slaguardia-skills",
+  "version": "2.0.0",
+  "description": "Skills for React Native and Expo, feature workflows, app compliance auditing, and Next.js. Every entry is a skill, so any one of them can be installed on its own.",
+  "author": {
+    "name": "Steven LaGuardia"
+  },
+  "repository": "https://github.com/slaguardia/claude-code-plugins",
+  "license": "MIT",
+  "keywords": [
+    "react-native",
+    "expo",
+    "workflow",
+    "planning",
+    "execution",
+    "compliance",
+    "privacy",
+    "app-store",
+    "nextjs",
+    "linting"
+  ],
+  "skills": [
+    "./skills/compliance/apple-compliance",
+    "./skills/compliance/dmca-audit",
+    "./skills/compliance/guidelines-audit",
+    "./skills/compliance/modal-audit",
+    "./skills/compliance/policy-cohesion",
+    "./skills/compliance/privacy-audit",
+    "./skills/compliance/terms-audit",
+    "./skills/compliance/welcome-screen-audit",
+    "./skills/database/migrate",
+    "./skills/react-native/accessibility-audit",
+    "./skills/react-native/architecture-audit",
+    "./skills/react-native/cook",
+    "./skills/react-native/lint-react-native",
+    "./skills/react-native/react-native-expert",
+    "./skills/react-native/ui-design",
+    "./skills/react-native/useeffect-patterns",
+    "./skills/web/lint-nextjs",
+    "./skills/web/update-docs-nextjs",
+    "./skills/workflow/acceptance-criteria",
+    "./skills/workflow/capture-learnings",
+    "./skills/workflow/claude-flow-audit",
+    "./skills/workflow/execute",
+    "./skills/workflow/goal-prompt",
+    "./skills/workflow/interactive-planning",
+    "./skills/workflow/ship",
+    "./skills/workflow/update-docs"
+  ],
+  "agents": [
+    "./agents/cache-agent.md",
+    "./agents/design-agent.md",
+    "./agents/form-handler.md",
+    "./agents/merge-agent.md",
+    "./agents/modal-agent.md"
+  ]
+}
