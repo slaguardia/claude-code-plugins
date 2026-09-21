@@ -76,7 +76,6 @@ Two kinds of skill, split by who can reach them.
 
 | Skill | Invocation | What it does |
 |-------|-----------|--------------|
-| `react-native-expert` | model | Cross-platform mobile specialist |
 | `ui-design` | model | Design principles, spacing, accessibility |
 | `useeffect-patterns` | model | When NOT to use Effect |
 | `lint-react-native` | user | Linting and type checking for RN/Expo |
