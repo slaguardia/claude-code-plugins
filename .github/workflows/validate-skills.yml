@@ -1,0 +1,29 @@
+name: Validate Skills
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # The official validator owns manifest schema: the same check
+      # `/plugin install` runs, so a green build means the plugin installs.
+      # It needs no auth and no API key. It does NOT read SKILL.md.
+      - name: Install Claude Code CLI
+        run: npm install -g @anthropic-ai/claude-code@latest
+
+      - name: Validate marketplace schema (official)
+        run: claude plugin validate .
+
+      # Ours covers the rest: frontmatter parses as real YAML, names match
+      # directories, no duplicates, and nothing on disk is left unshipped.
+      # Ruby ships on GitHub's runners, so there is nothing to install.
+      - name: Check skills and agents
+        run: ruby scripts/check-skills.rb

@@ -1,209 +1,191 @@
-# Claude Code Plugins
+# Claude Code Skills
 
-A curated collection of Claude Code plugins for React Native development, Next.js workflows, Linear automation, compliance auditing, and more.
+Agent skills for React Native and Expo, feature workflows, app compliance
+auditing, and Next.js. Take the whole set, or take one skill.
 
-## Quick Start
+Everything here is a skill. There are no slash commands as a separate kind of
+file, because a skill can already be user-invoked. That is what makes every
+entry installable on its own.
 
-### Add the Marketplace
+## Install
+
+Two routes. Take the whole set, or take one skill.
+
+### 1. The whole set (Claude Code)
 
 ```
 /plugin marketplace add slaguardia/claude-code-plugins
+/plugin install slaguardia-skills@slaguardia
 ```
 
-Or with full URL:
+On Claude Code v2.1.275 or later, one command does both:
 
 ```
-/plugin marketplace add https://github.com/slaguardia/claude-code-plugins
+/plugin install slaguardia-skills --marketplace slaguardia/claude-code-plugins
 ```
 
-### Install a Plugin
+Third-party marketplaces do not auto-update by default. To get updates, open
+`/plugin`, go to **Marketplaces**, select `slaguardia`, and choose **Enable
+auto-update**. Otherwise run `/plugin marketplace update slaguardia` yourself.
 
+### 2. One skill (any agent)
+
+Works with Claude Code, Codex, Cursor, Copilot, Zed, and others.
+
+```bash
+npx skills add slaguardia/claude-code-plugins --skill privacy-audit
 ```
-/plugin install react-native-design@slaguardia/claude-code-plugins
+
+List everything available first:
+
+```bash
+npx skills add slaguardia/claude-code-plugins --list
 ```
 
-Or browse available plugins:
+These are file copies you own and edit, not a managed bundle.
 
-```
-/plugin > Discover
-```
+Route 2 writes real files into your project, so edit them freely. To edit a
+skill and keep pulling updates, clone the repo instead and see
+[Working on these skills](#working-on-these-skills).
 
-## Available Plugins
+## Invocation
 
-| Plugin | Description | Components |
-|--------|-------------|------------|
-| **react-native-design** | Complete React Native/Expo toolkit | 5 agents, 2 skills, 4 commands |
-| **ralph-linear** | Linear workflow automation with Ralph Wiggum loop | 3 skills, 2 commands |
-| **compliance-auditor** | App compliance auditing suite | 8 commands |
-| **claude-docs** | Documentation management | 2 commands |
-| **nextjs-development** | Next.js development tools | 2 commands |
-| **database-migration** | Flyway migration tools | 1 command |
+Two kinds of skill, split by who can reach them.
 
-## Plugin Details
+- **Model-invoked**: Claude reaches for it on its own when the work matches.
+  The description carries trigger phrases.
+- **User-invoked**: only you can start it, by typing its name. The frontmatter
+  sets `disable-model-invocation: true`. These were slash commands before.
 
-### react-native-design `v1.3.0`
+## Skills
 
-Complete React Native/Expo development toolkit with UI design standards, specialized agents, and code quality tools.
+### workflow
 
-**Agents:**
-- `design-agent` - UI development standards with glassmorphism focus
-- `modal-agent` - Modal component creation and auditing
-- `form-handler` - Form state, validation, and transitions
-- `cache-agent` - React Query cache management
-- `merge-agent` - Pre-merge quality checks
+| Skill | Invocation | What it does |
+|-------|-----------|--------------|
+| `interactive-planning` | model | Turn an idea into task files with user stories |
+| `acceptance-criteria` | model | Generate testable acceptance criteria |
+| `execute` | model | Implement a feature, one sub-task at a time |
+| `ship` | model | Run stories in parallel subagents |
+| `goal-prompt` | model | Emit a short hand-off prompt for another agent |
+| `update-docs` | user | Clean up stale docs, document new patterns |
+| `capture-learnings` | user | Save session insights into project docs |
+| `claude-flow-audit` | user | Find token-overhead patterns in `.claude/` |
 
-**Skills:**
-- `ui-design` - Design principles, spacing, accessibility
-- `useeffect-patterns` - When NOT to use Effect
+### react-native
 
-**Commands:**
-- `/lint` - Comprehensive linting and type checking
-- `/architecture-audit` - Project structure analysis
-- `/accessibility-audit` - iOS Dynamic Type compliance
-- `/cook` - Product refinement by taste
+| Skill | Invocation | What it does |
+|-------|-----------|--------------|
+| `ui-design` | model | Design principles, spacing, accessibility |
+| `useeffect-patterns` | model | When NOT to use Effect |
+| `lint-react-native` | user | Linting and type checking for RN/Expo |
+| `architecture-audit` | user | Check against mobile architecture patterns |
+| `accessibility-audit` | user | iOS Dynamic Type and layout breakage |
+| `cook` | user | Refine the codebase against the product spec |
 
-### ralph-linear `v1.1.0`
+### compliance
 
-Complete Linear workflow automation: planning issues with user stories, async collaboration, and autonomous implementation.
+| Skill | Invocation | What it does |
+|-------|-----------|--------------|
+| `apple-compliance` | user | App Store Review Guidelines |
+| `privacy-audit` | user | GDPR, CCPA/CPRA, BIPA |
+| `terms-audit` | user | Terms of service clarity |
+| `dmca-audit` | user | DMCA policy, 17 U.S.C. § 512 |
+| `guidelines-audit` | user | Community guidelines |
+| `policy-cohesion` | user | Consistency across policy documents |
+| `welcome-screen-audit` | user | Auth and welcome screen UX |
+| `modal-audit` | user | Modal component consistency |
 
-**Skills:**
-- `/ralph` - Execute one Ralph Wiggum loop iteration
-- `/interactive-planning` - Create Linear issues through Q&A
-- `/headless-planning` - Async planning via Linear descriptions
+### web
 
-**Commands:**
-- `/process-feedback` - Improve Linear Feedback issues
-- `/update-changelog` - Generate changelog from commits
+| Skill | Invocation | What it does |
+|-------|-----------|--------------|
+| `lint-nextjs` | user | TypeScript, ESLint, Prettier, Depcheck |
+| `update-docs-nextjs` | user | Sync CLAUDE.md with the codebase |
 
-**Requires:** `linear-server` MCP
+### database
 
-### compliance-auditor `v1.0.0`
+| Skill | Invocation | What it does |
+|-------|-----------|--------------|
+| `migrate` | user | Run Flyway migrations and resolve errors |
 
-Comprehensive compliance auditing for app policies, privacy, and App Store requirements.
+## Agents
 
-**Commands:**
-- `/apple-compliance` - App Store Review Guidelines
-- `/privacy-audit` - GDPR, CCPA/CPRA compliance
-- `/terms-audit` - Terms of service clarity
-- `/dmca-audit` - DMCA/copyright policy
-- `/guidelines-audit` - Community guidelines
-- `/policy-cohesion` - Cross-document consistency
-- `/welcome-screen-audit` - Auth screen UX
-- `/modal-audit` - Modal component consistency
+Five React Native agents ship with the plugin: `design-agent`, `modal-agent`,
+`form-handler`, `cache-agent`, and `merge-agent`. Agents are not individually
+installable; they come with the whole set.
 
-### claude-docs `v1.2.0`
-
-Tools for managing CLAUDE.md documentation.
-
-**Commands:**
-- `/capture-learnings` - Save session insights to docs
-- `/update-docs` - Sync docs with codebase structure
-
-### nextjs-development `v1.0.0`
-
-Next.js development tools for App Router projects with pnpm.
-
-**Commands:**
-- `/lint` - TypeScript, ESLint, Prettier, Depcheck
-- `/update-docs` - Sync documentation files
-
-### database-migration `v1.0.0`
-
-Database migration tools for Flyway.
-
-**Commands:**
-- `/migrate` - Run Flyway migrations and resolve errors
-
-## Directory Structure
+## Layout
 
 ```
 claude-code-plugins/
 ├── .claude-plugin/
-│   └── marketplace.json        # Marketplace metadata
-├── plugins/
-│   ├── react-native-design/
-│   │   ├── .claude-plugin/
-│   │   │   └── plugin.json     # Plugin metadata
-│   │   ├── README.md
-│   │   ├── agents/
-│   │   ├── skills/
-│   │   └── commands/
-│   ├── ralph-linear/
-│   │   ├── .claude-plugin/
-│   │   │   └── plugin.json
-│   │   ├── README.md
-│   │   ├── skills/
-│   │   └── commands/
-│   ├── compliance-auditor/
-│   │   ├── .claude-plugin/
-│   │   │   └── plugin.json
-│   │   ├── README.md
-│   │   └── commands/
-│   ├── claude-docs/
-│   │   ├── .claude-plugin/
-│   │   │   └── plugin.json
-│   │   ├── README.md
-│   │   └── commands/
-│   ├── nextjs-development/
-│   │   ├── .claude-plugin/
-│   │   │   └── plugin.json
-│   │   ├── README.md
-│   │   └── commands/
-│   └── database-migration/
-│       ├── .claude-plugin/
-│       │   └── plugin.json
-│       ├── README.md
-│       └── commands/
-└── README.md
+│   ├── plugin.json         # one plugin, explicit skill paths
+│   └── marketplace.json    # so the repo is its own marketplace
+├── skills/
+│   ├── workflow/<name>/SKILL.md
+│   ├── react-native/<name>/SKILL.md
+│   ├── compliance/<name>/SKILL.md
+│   ├── web/<name>/SKILL.md
+│   └── database/<name>/SKILL.md
+├── agents/<name>.md
+└── scripts/
+    ├── link-skills.sh     # symlink skills into ~/.claude/skills
+    └── check-skills.rb    # what the official validator does not check
 ```
 
-## Installation Commands
+A skill is listed in `plugin.json` to ship. A skill on disk but absent from
+that list does not ship, which is how work in progress stays out of the way.
 
-Copy-paste commands to install each plugin:
+## Working on these skills
+
+This section is for editing the skills in this repo. It is not an install
+route. If you only want to use them, use one of the two routes above.
+
+`scripts/link-skills.sh` symlinks every skill into `~/.claude/skills`, so the
+working tree is the one source of truth and an edit is live in your next
+session. Neither install route does this: a plugin install is a read-only
+managed copy, and `npx skills` copies files from a local path rather than
+linking them.
 
 ```bash
-# React Native/Expo toolkit
-/plugin install react-native-design@slaguardia/claude-code-plugins
-
-# Linear automation
-/plugin install ralph-linear@slaguardia/claude-code-plugins
-
-# Compliance auditing
-/plugin install compliance-auditor@slaguardia/claude-code-plugins
-
-# Documentation management
-/plugin install claude-docs@slaguardia/claude-code-plugins
-
-# Next.js development
-/plugin install nextjs-development@slaguardia/claude-code-plugins
-
-# Database migrations
-/plugin install database-migration@slaguardia/claude-code-plugins
+git clone https://github.com/slaguardia/claude-code-plugins
+cd claude-code-plugins
+./scripts/link-skills.sh --dry-run   # preview
+./scripts/link-skills.sh             # link
+./scripts/link-skills.sh --unlink    # undo
 ```
 
-## Plugin Structure
+It refuses to overwrite a real directory already in `~/.claude/skills`, and
+reports it as a conflict instead. A conflict means that skill exists twice and
+the two copies will drift.
 
-Each plugin follows the standard Claude Code plugin structure:
+## Validation
 
+Two checks, and they do different jobs.
+
+```bash
+claude plugin validate .            # manifest schema; what /plugin install runs
+ruby scripts/check-skills.rb        # frontmatter YAML, name collisions, unshipped skills
 ```
-plugin-name/
-├── .claude-plugin/
-│   └── plugin.json      # Plugin metadata (required)
-├── .mcp.json            # MCP server configuration (optional)
-├── README.md            # Documentation
-├── commands/            # Slash commands (optional)
-│   └── command-name.md
-├── agents/              # Agent definitions (optional)
-│   └── agent-name.md
-└── skills/              # Skill definitions (optional)
-    └── skill-name/
-        ├── SKILL.md
-        └── resources/
-```
+
+The official validator does not read `SKILL.md`. A skill with broken or missing
+frontmatter passes it and is silently dead at runtime.
+
+Claude Code's own frontmatter parser is lenient, which hides a sharper bug. A
+description like `Does a thing. Keywords: a, b` loads fine in Claude Code but is
+invalid YAML, because the second colon opens a nested mapping. `npx skills`
+skips such a skill without failing, so it cannot be installed on its own and
+nothing warns you. `check-skills.rb` parses with a real YAML parser to catch it.
+
+CI runs both checks.
 
 ## Contributing
 
-Feel free to open issues or submit pull requests to add new plugins or improve existing ones.
+Add a skill under `skills/<category>/<name>/SKILL.md`, give it `name` and
+`description` in frontmatter, and add its path to `skills` in
+`.claude-plugin/plugin.json`. Set `disable-model-invocation: true` if only a
+human should start it. Run both checks above before opening a PR.
 
 ## License
 
